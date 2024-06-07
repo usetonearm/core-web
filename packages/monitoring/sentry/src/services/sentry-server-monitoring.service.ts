@@ -34,7 +34,7 @@ export class SentryServerMonitoringService implements MonitoringService {
           useMatches,
         }),
         // Replay is only available in the client
-        replayIntegration(),
+        // replayIntegration(),
       ],
 
       // Set tracesSampleRate to 1.0 to capture 100%

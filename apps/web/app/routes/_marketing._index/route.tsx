@@ -33,15 +33,15 @@ export default function Index() {
             }
           >
             <Pill>
-              <span>The leading SaaS Starter Kit for ambitious developers</span>
+              <span>The leading internet radio monitoring solution</span>
             </Pill>
 
             <div className={'flex flex-col items-center space-y-8'}>
               <HeroTitle>
-                <span>The SaaS Starter Kit</span>
+                <span>The stream monitoring solution</span>
 
                 <span>
-                  <span>for ambitious developers</span>
+                  <span>for every source of audio</span>
                 </span>
               </HeroTitle>
 
