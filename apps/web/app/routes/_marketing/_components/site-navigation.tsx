@@ -13,14 +13,14 @@ import { Trans } from '@kit/ui/trans';
 import { SiteNavigationItem } from './site-navigation-item';
 
 const links = {
-  Blog: {
-    label: 'marketing:blog',
-    path: '/blog',
-  },
-  Docs: {
-    label: 'marketing:documentation',
-    path: '/docs',
-  },
+  // Blog: {
+  //   label: 'marketing:blog',
+  //   path: '/blog',
+  // },
+  // Docs: {
+  //   label: 'marketing:documentation',
+  //   path: '/docs',
+  // },
   Pricing: {
     label: 'marketing:pricing',
     path: '/pricing',

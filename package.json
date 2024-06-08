@@ -1,13 +1,13 @@
 {
-  "name": "remix-supabase-saas-kit-turbo",
+  "name": "broadcasthound-mono",
   "private": true,
   "sideEffects": false,
   "engines": {
     "node": ">=v18.17.1"
   },
   "author": {
-    "url": "https://makerkit.dev",
-    "name": "MakerKit"
+    "url": "https://broadcasthound.com",
+    "name": "BroadcastHound"
   },
   "scripts": {
     "build": "turbo build --cache-dir=.turbo",

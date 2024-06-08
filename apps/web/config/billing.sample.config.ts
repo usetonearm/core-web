@@ -30,9 +30,9 @@ export default createBillingSchema({
           interval: 'month',
           lineItems: [
             {
-              id: 'price_1NNwYHI1i3VnbZTqI2UzaHIe',
-              name: 'Addon 2',
-              cost: 9.99,
+              id: 'price_1PPG54BkJgtEM3ooEKtCzfYG',
+              name: 'Pro Monthly',
+              cost: 9.0,
               type: 'flat' as const,
             },
           ],
@@ -44,9 +44,9 @@ export default createBillingSchema({
           interval: 'year',
           lineItems: [
             {
-              id: 'pro-yearly',
-              name: 'Base',
-              cost: 99.99,
+              id: 'price_1PPGCMBkJgtEM3oorPj2RFGi',
+              name: 'Pro Yearly',
+              cost: 90,
               type: 'flat' as const,
             },
           ],
