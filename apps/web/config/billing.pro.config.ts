@@ -26,11 +26,12 @@ export default createBillingSchema({
         {
           name: 'Pro Monthly',
           id: 'pro-monthly',
+          trialDays: 14,
           paymentType: 'recurring',
           interval: 'month',
           lineItems: [
             {
-              id: 'price_1PPG54BkJgtEM3ooEKtCzfYG',
+              id: 'price_1PPGMqBkJgtEM3ooQwlrsMK2',
               name: 'Pro Monthly',
               cost: 9.0,
               type: 'flat' as const,
@@ -40,13 +41,14 @@ export default createBillingSchema({
         {
           name: 'Pro Yearly',
           id: 'pro-yearly',
+          trialDays: 14,
           paymentType: 'recurring',
           interval: 'year',
           lineItems: [
             {
-              id: 'price_1PPGCMBkJgtEM3oorPj2RFGi',
+              id: 'price_1PPGMlBkJgtEM3oota3367wa',
               name: 'Pro Yearly',
-              cost: 90,
+              cost: 90.0,
               type: 'flat' as const,
             },
           ],
