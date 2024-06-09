@@ -116,6 +116,38 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
+function StatusIcon(
+  props: React.PropsWithChildren<{
+    status: 'online' | 'pending' | 'silence' | 'error' | 'down';
+  }>,
+) {
+  const color = useMemo(() => {
+    switch (props.status) {
+      case 'online':
+        return 'bg-green-400';
+      case 'pending':
+        return 'bg-yellow-400';
+      case 'silence':
+      case 'error':
+      case 'down':
+        return 'bg-red-400';
+    }
+  }, [props.status]);
+
+  return (
+    <div className="flex w-8 justify-center">
+      <div className="relative flex h-4 w-4">
+        <span
+          className={`absolute inline-flex h-full w-full animate-ping rounded-full ${color} opacity-75`}
+        ></span>
+        <span
+          className={`relative inline-flex h-4 w-4 rounded-full ${color}`}
+        ></span>
+      </div>
+    </div>
+  );
+}
+
 export default function StreamPage() {
   const { stream, account, email, title, statusChanges } =
     useLoaderData<typeof loader>();
