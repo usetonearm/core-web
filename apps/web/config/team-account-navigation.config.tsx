@@ -1,4 +1,10 @@
-import { CreditCard, LayoutDashboard, Settings, Users } from 'lucide-react';
+import {
+  CreditCard,
+  LayoutDashboard,
+  RadioTower,
+  Settings,
+  Users,
+} from 'lucide-react';
 
 import { NavigationConfigSchema } from '@kit/ui/navigation-schema';
 
@@ -8,10 +14,16 @@ import pathsConfig from './paths.config';
 const iconClasses = 'w-4';
 
 const getRoutes = (account: string) => [
+  // {
+  //   label: 'common:dashboardTabLabel',
+  //   path: pathsConfig.app.accountHome.replace('[account]', account),
+  //   Icon: <LayoutDashboard className={iconClasses} />,
+  //   end: true,
+  // },
   {
-    label: 'common:dashboardTabLabel',
-    path: pathsConfig.app.accountHome.replace('[account]', account),
-    Icon: <LayoutDashboard className={iconClasses} />,
+    label: 'common:streamsTabLabel',
+    path: pathsConfig.app.accountStreams.replace('[account]', account),
+    Icon: <RadioTower className={iconClasses} />,
     end: true,
   },
   {

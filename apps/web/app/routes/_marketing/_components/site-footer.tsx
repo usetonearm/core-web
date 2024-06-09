@@ -52,6 +52,36 @@ export function SiteFooter() {
             <div>
               <div className={'flex flex-col space-y-2.5'}>
                 <FooterSectionHeading>
+                  <Trans i18nKey={'marketing:useCase'} />
+                </FooterSectionHeading>
+
+                <FooterSectionList>
+                  <FooterLink>
+                    <Link to={'/terms-of-service'}>
+                      <Trans i18nKey={'marketing:forRadioCo'} />
+                    </Link>
+                  </FooterLink>
+                  <FooterLink>
+                    <Link to={'/privacy-policy'}>
+                      <Trans i18nKey={'marketing:forAirtimePro'} />
+                    </Link>
+                  </FooterLink>
+                  <FooterLink>
+                    <Link to={'/cookie-policy'}>
+                      <Trans i18nKey={'marketing:forIcecast'} />
+                    </Link>
+                  </FooterLink>
+                  <FooterLink>
+                    <Link to={'/cookie-policy'}>
+                      <Trans i18nKey={'marketing:forLibretime'} />
+                    </Link>
+                  </FooterLink>
+                </FooterSectionList>
+              </div>
+            </div>
+            <div>
+              <div className={'flex flex-col space-y-2.5'}>
+                <FooterSectionHeading>
                   <Trans i18nKey={'marketing:about'} />
                 </FooterSectionHeading>
 

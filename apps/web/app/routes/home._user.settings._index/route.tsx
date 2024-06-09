@@ -39,6 +39,11 @@ export const loader = async (args: LoaderFunctionArgs) => {
   // require user
   const user = await requireUserLoader(args.request);
 
+  const supabase = getSupabaseServerClient(args.request);
+
+  const { data, error } = await supabase.from('tasks').select('*');
+  s;
+
   const i18n = await createI18nServerInstance(args.request);
   const title = i18n.t('account:settingsTab');
 

@@ -17,7 +17,7 @@ function LogoImage({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <text x="250" y="180" font-family="Arial" font-size="200" fill="black">
+      <text x="250" y="180" fontFamily="Arial" fontSize="200" fill="black">
         BH
       </text>
 

@@ -19,7 +19,7 @@ export default createBillingSchema({
     {
       id: 'pro',
       name: 'Pro',
-      description: 'Full coverage of your broadcasts',
+      description: 'Comprehensive uptime coverage of your broadcasts',
       currency: 'USD',
       badge: `Premium`,
       plans: [
@@ -31,7 +31,8 @@ export default createBillingSchema({
           interval: 'month',
           lineItems: [
             {
-              id: 'price_1PPGMqBkJgtEM3ooQwlrsMK2',
+              // id: 'price_1PPGMqBkJgtEM3ooQwlrsMK2',
+              id: 'price_1PPG54BkJgtEM3ooEKtCzfYG',
               name: 'Pro Monthly',
               cost: 9.0,
               type: 'flat' as const,
@@ -46,7 +47,8 @@ export default createBillingSchema({
           interval: 'year',
           lineItems: [
             {
-              id: 'price_1PPGMlBkJgtEM3oota3367wa',
+              // id: 'price_1PPGMlBkJgtEM3oota3367wa',
+              id: 'price_1PPGCMBkJgtEM3oorPj2RFGi',
               name: 'Pro Yearly',
               cost: 90.0,
               type: 'flat' as const,
@@ -55,9 +57,10 @@ export default createBillingSchema({
         },
       ],
       features: [
-        'Monitor unlimited streams',
+        'Unlimited streams to monitor',
+        'Slack, Discord, and Email alerts',
         'Checks every minute',
-        'Unlimited notifications',
+        'Silence detection',
       ],
     },
     // {

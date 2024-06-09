@@ -12,6 +12,9 @@
     "dangerZone": "Danger Zone",
     "dangerZoneDescription": "This section contains actions that are irreversible"
   },
+  "streams": {
+    "pageTitle": "Streams"
+  },
   "members": {
     "pageTitle": "Members"
   },

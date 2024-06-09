@@ -14,20 +14,28 @@ import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
 import { requireUserLoader } from '~/lib/require-user-loader';
 import { TeamAccountLayoutPageHeader } from '~/routes/home.$account/_components/team-account-layout-page-header';
 
-const DashboardDemo = lazy(() => import('./_components/dashboard-demo'));
+const DashboardDemo = lazy(() => import('./dashboard-demo'));
 
 export const loader = async (args: LoaderFunctionArgs) => {
   const i18n = await createI18nServerInstance(args.request);
 
   // require user
   await requireUserLoader(args.request);
+  const supabase = getSupabaseServerClient(args.request);
+
+  const { data: streamsData, error } = await supabase
+    .from('streams')
+    .select('*');
+
+  console.log(streamsData);
 
   const account = args.params.account as string;
-  const title = i18n.t('teams:streams.pageTitle');
+  const title = i18n.t('teams:home.pageTitle');
 
   return {
     title,
     account,
+    streams: streamsData,
   };
 };
 
@@ -39,19 +47,19 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export default function TeamAccountHomePage() {
+export default function TeamStreamsPage() {
   const data = useLoaderData<typeof loader>();
 
   return (
     <>
       <TeamAccountLayoutPageHeader
         account={data.account}
-        title={<Trans i18nKey={'common:dashboardTabLabel'} />}
-        description={<Trans i18nKey={'common:dashboardTabDescription'} />}
+        title={<Trans i18nKey={'common:streamsTabLabel'} />}
+        description={<Trans i18nKey={'common:streamsTabDescription'} />}
       >
         <Button>
           <PlusCircle className={'mr-1 h-4'} />
-          <span>Add Widget</span>
+          <span>Add Stream</span>
         </Button>
       </TeamAccountLayoutPageHeader>
 

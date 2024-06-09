@@ -6,6 +6,8 @@
   "billingTabLabel": "Billing",
   "billingTabDescription": "Manage your billing and subscription",
   "dashboardTabLabel": "Dashboard",
+  "streamsTabLabel": "Streams",
+  "streamsTabDescription": "All your streams in one place",
   "settingsTabLabel": "Settings",
   "profileSettingsTabLabel": "Profile",
   "subscriptionSettingsTabLabel": "Subscription",
