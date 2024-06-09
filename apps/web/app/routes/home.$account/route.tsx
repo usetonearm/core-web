@@ -75,7 +75,9 @@ export default function TeamWorkspaceLayout() {
         </div>
       </PageMobileNavigation>
 
-      <Outlet />
+      <div className="mx-auto w-full max-w-screen-lg pt-12">
+        <Outlet />
+      </div>
     </Page>
   );
 }

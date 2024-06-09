@@ -42,7 +42,6 @@ export const loader = async (args: LoaderFunctionArgs) => {
   const supabase = getSupabaseServerClient(args.request);
 
   const { data, error } = await supabase.from('tasks').select('*');
-  s;
 
   const i18n = await createI18nServerInstance(args.request);
   const title = i18n.t('account:settingsTab');
@@ -62,7 +61,6 @@ export default function PersonalAccountSettingsPage() {
         title={<Trans i18nKey={'account:accountTabLabel'} />}
         description={<Trans i18nKey={'account:accountTabDescription'} />}
       />
-
       <PageBody>
         <div className={'flex w-full flex-1 flex-col lg:max-w-2xl'}>
           <PersonalAccountSettingsContainer

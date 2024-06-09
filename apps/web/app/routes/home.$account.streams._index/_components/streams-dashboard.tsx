@@ -58,9 +58,22 @@ export default function StreamsDashboard({
 }
 
 function StreamListItem(stream: Stream, account: string) {
+  const color = useMemo(() => {
+    switch (stream.status) {
+      case 'online':
+        return 'text-green-400';
+      case 'pending':
+        return 'text-yellow-400';
+      case 'silence':
+      case 'error':
+      case 'down':
+        return 'text-red-400';
+    }
+  }, [stream.status]);
+
   return (
-    <Link to={`/home/${account}/streams/${stream.id}`}>
-      <Card key={stream.id} className="cursor-pointer hover:bg-gray-50">
+    <Link to={`/home/${account}/streams/${stream.id}`} key={stream.id}>
+      <Card key={stream.id} className="cursor-pointer hover:bg-gray-900">
         <div className="flex items-center justify-between p-6">
           <div className="flex items-center">
             <div className="w-8">
@@ -71,12 +84,12 @@ function StreamListItem(stream: Stream, account: string) {
                 <span>{stream.title}</span>
               </div>
               <div className={`text-sm`}>
-                <span>
+                <span className={`${color} font-medium`}>
                   {stream.status.charAt(0).toUpperCase() +
                     stream.status.slice(1)}
                   {' · '}
-                  {'23h'}
                 </span>
+                <span className="text-gray-400">{'23h'}</span>
               </div>
               <div className="text-sm text-gray-400">
                 <span>{stream.url}</span>
@@ -112,20 +125,20 @@ function StatusIcon(
   const color = useMemo(() => {
     switch (props.status) {
       case 'online':
-        return 'green-400';
+        return 'bg-green-400';
       case 'pending':
-        return 'yellow-400';
+        return 'bg-yellow-400';
       case 'silence':
       case 'error':
       case 'down':
-        return 'red-400';
+        return 'bg-red-400';
     }
   }, [props.status]);
 
   return (
     // <div>
     //   <span className={`flex items-center gap-2 font-normal text-${color}`}>
-    <div className={`h-3 w-3 bg-${color} rounded-full`}></div>
+    <div className={`h-3 w-3 ${color} rounded-full`}></div>
     //     <span>{props.status}</span>
     //   </span>
     // </div>
