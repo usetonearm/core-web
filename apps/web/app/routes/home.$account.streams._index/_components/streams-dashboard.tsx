@@ -74,9 +74,9 @@ function StreamListItem(stream: Stream, account: string) {
   return (
     <Link to={`/home/${account}/streams/${stream.id}`} key={stream.id}>
       <Card key={stream.id} className="cursor-pointer hover:bg-gray-900">
-        <div className="flex items-center justify-between p-6">
+        <div className="flex items-center justify-between p-4">
           <div className="flex items-center">
-            <div className="w-8">
+            <div className="flex w-16 items-center justify-center">
               <StatusIcon status={stream.status} />
             </div>
             <div className="justify-self-start">

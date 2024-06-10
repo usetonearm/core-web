@@ -586,6 +586,9 @@ export type Database = {
           account_id: string
           created_at: string
           id: string
+          last_check: string | null
+          last_online: string | null
+          last_outage: string | null
           status: Database["public"]["Enums"]["check_status"]
           title: string
           updated_at: string
@@ -595,6 +598,9 @@ export type Database = {
           account_id: string
           created_at?: string
           id?: string
+          last_check?: string | null
+          last_online?: string | null
+          last_outage?: string | null
           status?: Database["public"]["Enums"]["check_status"]
           title: string
           updated_at?: string
@@ -604,6 +610,9 @@ export type Database = {
           account_id?: string
           created_at?: string
           id?: string
+          last_check?: string | null
+          last_online?: string | null
+          last_outage?: string | null
           status?: Database["public"]["Enums"]["check_status"]
           title?: string
           updated_at?: string

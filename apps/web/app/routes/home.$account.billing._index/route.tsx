@@ -143,32 +143,30 @@ export default function TeamAccountBillingPage() {
         description={<Trans i18nKey={'common:billingTabDescription'} />}
       />
 
-      <PageBody>
-        <div
-          className={cn(`flex w-full flex-col space-y-4`, {
-            'max-w-2xl': data,
-          })}
-        >
-          <If condition={data} fallback={<div>{Checkout}</div>}>
-            {(data) => {
-              if ('active' in data) {
-                return (
-                  <CurrentSubscriptionCard
-                    subscription={data}
-                    config={billingConfig}
-                  />
-                );
-              }
-
+      <div
+        className={cn(`flex w-full flex-col space-y-4`, {
+          'max-w-2xl': data,
+        })}
+      >
+        <If condition={data} fallback={<div>{Checkout}</div>}>
+          {(data) => {
+            if ('active' in data) {
               return (
-                <CurrentLifetimeOrderCard order={data} config={billingConfig} />
+                <CurrentSubscriptionCard
+                  subscription={data}
+                  config={billingConfig}
+                />
               );
-            }}
-          </If>
+            }
 
-          {BillingPortal}
-        </div>
-      </PageBody>
+            return (
+              <CurrentLifetimeOrderCard order={data} config={billingConfig} />
+            );
+          }}
+        </If>
+
+        {BillingPortal}
+      </div>
     </>
   );
 }

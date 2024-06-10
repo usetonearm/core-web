@@ -8,11 +8,7 @@ export function TeamAccountLayoutPageHeader(
   }>,
 ) {
   return (
-    <PageHeader
-      title={props.title}
-      description={props.description}
-      className="p-12"
-    >
+    <PageHeader title={props.title} description={props.description}>
       {props.children}
     </PageHeader>
   );

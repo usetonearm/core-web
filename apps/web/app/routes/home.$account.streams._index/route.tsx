@@ -5,6 +5,7 @@ import { LoaderFunctionArgs } from '@remix-run/server-runtime';
 import { PlusCircle } from 'lucide-react';
 
 import { getSupabaseServerClient } from '@kit/supabase/server-client';
+import { createTeamAccountsApi } from '@kit/team-accounts/api';
 import { Button } from '@kit/ui/button';
 import { ClientOnly } from '@kit/ui/client-only';
 import { PageBody } from '@kit/ui/page';
@@ -14,7 +15,7 @@ import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
 import { requireUserLoader } from '~/lib/require-user-loader';
 import { TeamAccountLayoutPageHeader } from '~/routes/home.$account/_components/team-account-layout-page-header';
 
-import AddStream from './_components/add-steam';
+import AddStream from './_components/add-stream';
 
 const StreamsDashboard = lazy(() => import('./_components/streams-dashboard'));
 
@@ -32,9 +33,15 @@ export const loader = async (args: LoaderFunctionArgs) => {
   const account = args.params.account as string;
   const title = i18n.t('teams:home.pageTitle');
 
+  const api = createTeamAccountsApi(supabase);
+  const workspace = await api.getAccountWorkspace(account);
+
+  console.log(workspace.data);
+
   return {
     title,
     account,
+    accountId: workspace.data?.account.id,
     streams: streamsData,
   };
 };
@@ -57,13 +64,12 @@ export default function TeamStreamsPage() {
         title={<Trans i18nKey={'common:streamsTabLabel'} />}
         description={<Trans i18nKey={'common:streamsTabDescription'} />}
       >
-        <AddStream account={data.account} />
+        <AddStream account={data.accountId as string} />
       </TeamAccountLayoutPageHeader>
-      <PageBody>
-        <ClientOnly>
-          <StreamsDashboard streams={data.streams} account={data.account} />
-        </ClientOnly>
-      </PageBody>
+
+      <ClientOnly>
+        <StreamsDashboard streams={data.streams} account={data.account} />
+      </ClientOnly>
     </>
   );
 }

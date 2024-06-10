@@ -148,12 +148,7 @@ export function PageHeader({
   description?: string | React.ReactNode;
 }>) {
   return (
-    <div
-      className={cn(
-        'flex h-20 items-center justify-between lg:px-4',
-        className,
-      )}
-    >
+    <div className={cn('flex h-20 items-center justify-between', className)}>
       {title ? (
         <div className={'flex flex-col space-y-1.5'}>
           <PageTitle>{title}</PageTitle>

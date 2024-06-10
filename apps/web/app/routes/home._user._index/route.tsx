@@ -24,8 +24,6 @@ export default function UserHomePage() {
         title={<Trans i18nKey={'common:homeTabLabel'} />}
         description={<Trans i18nKey={'common:homeTabDescription'} />}
       />
-
-      <PageBody></PageBody>
     </>
   );
 }

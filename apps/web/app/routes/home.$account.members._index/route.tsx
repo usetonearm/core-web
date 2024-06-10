@@ -123,70 +123,68 @@ export default function TeamAccountMembersPage() {
         account={data.accountSlug}
       />
 
-      <PageBody>
-        <div className={'flex w-full max-w-4xl flex-col space-y-6 pb-32'}>
-          <Card>
-            <CardHeader className={'flex flex-row justify-between'}>
-              <div className={'flex flex-col space-y-1.5'}>
-                <CardTitle>
-                  <Trans i18nKey={'common:membersTabLabel'} />
-                </CardTitle>
+      <div className={'flex w-full max-w-4xl flex-col space-y-6 pb-32'}>
+        <Card>
+          <CardHeader className={'flex flex-row justify-between'}>
+            <div className={'flex flex-col space-y-1.5'}>
+              <CardTitle>
+                <Trans i18nKey={'common:membersTabLabel'} />
+              </CardTitle>
 
-                <CardDescription>
-                  <Trans i18nKey={'common:membersTabDescription'} />
-                </CardDescription>
-              </div>
+              <CardDescription>
+                <Trans i18nKey={'common:membersTabDescription'} />
+              </CardDescription>
+            </div>
 
-              <If condition={canManageInvitations && data.canAddMember}>
-                <InviteMembersDialogContainer
-                  userRoleHierarchy={currentUserRoleHierarchy}
-                  accountSlug={data.accountSlug}
-                >
-                  <Button size={'sm'} data-test={'invite-members-form-trigger'}>
-                    <PlusCircle className={'mr-2 w-4'} />
-
-                    <span>
-                      <Trans i18nKey={'teams:inviteMembersButton'} />
-                    </span>
-                  </Button>
-                </InviteMembersDialogContainer>
-              </If>
-            </CardHeader>
-
-            <CardContent>
-              <AccountMembersTable
+            <If condition={canManageInvitations && data.canAddMember}>
+              <InviteMembersDialogContainer
                 userRoleHierarchy={currentUserRoleHierarchy}
-                currentUserId={data.user.id}
-                currentAccountId={account.id}
-                members={data.members}
-                isPrimaryOwner={isPrimaryOwner}
-                canManageRoles={canManageRoles}
-              />
-            </CardContent>
-          </Card>
+                accountSlug={data.accountSlug}
+              >
+                <Button size={'sm'} data-test={'invite-members-form-trigger'}>
+                  <PlusCircle className={'mr-2 w-4'} />
 
-          <Card>
-            <CardHeader className={'flex flex-row justify-between'}>
-              <div className={'flex flex-col space-y-1.5'}>
-                <CardTitle>
-                  <Trans i18nKey={'teams:pendingInvitesHeading'} />
-                </CardTitle>
+                  <span>
+                    <Trans i18nKey={'teams:inviteMembersButton'} />
+                  </span>
+                </Button>
+              </InviteMembersDialogContainer>
+            </If>
+          </CardHeader>
 
-                <CardDescription>
-                  <Trans i18nKey={'teams:pendingInvitesDescription'} />
-                </CardDescription>
-              </div>
-            </CardHeader>
+          <CardContent>
+            <AccountMembersTable
+              userRoleHierarchy={currentUserRoleHierarchy}
+              currentUserId={data.user.id}
+              currentAccountId={account.id}
+              members={data.members}
+              isPrimaryOwner={isPrimaryOwner}
+              canManageRoles={canManageRoles}
+            />
+          </CardContent>
+        </Card>
 
-            <CardContent>
-              <AccountInvitationsTable
-                permissions={permissions}
-                invitations={data.invitations}
-              />
-            </CardContent>
-          </Card>
-        </div>
-      </PageBody>
+        <Card>
+          <CardHeader className={'flex flex-row justify-between'}>
+            <div className={'flex flex-col space-y-1.5'}>
+              <CardTitle>
+                <Trans i18nKey={'teams:pendingInvitesHeading'} />
+              </CardTitle>
+
+              <CardDescription>
+                <Trans i18nKey={'teams:pendingInvitesDescription'} />
+              </CardDescription>
+            </div>
+          </CardHeader>
+
+          <CardContent>
+            <AccountInvitationsTable
+              permissions={permissions}
+              invitations={data.invitations}
+            />
+          </CardContent>
+        </Card>
+      </div>
     </>
   );
 }

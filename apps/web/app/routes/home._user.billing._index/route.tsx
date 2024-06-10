@@ -56,43 +56,38 @@ export default function PersonalAccountBillingPage() {
         description={<Trans i18nKey={'common:billingTabDescription'} />}
       />
 
-      <PageBody>
-        <div className={'flex flex-col space-y-4'}>
-          <If condition={!data}>
-            <PersonalAccountCheckoutForm customerId={customerId} />
+      <div className={'flex flex-col space-y-4'}>
+        <If condition={!data}>
+          <PersonalAccountCheckoutForm customerId={customerId} />
 
-            <If condition={customerId}>
-              <CustomerBillingPortalForm />
-            </If>
+          <If condition={customerId}>
+            <CustomerBillingPortalForm />
           </If>
+        </If>
 
-          <If condition={data}>
-            {(data) => (
-              <div className={'flex w-full max-w-2xl flex-col space-y-6'}>
-                {'active' in data ? (
-                  <CurrentSubscriptionCard
-                    subscription={data}
-                    config={billingConfig}
-                  />
-                ) : (
-                  <CurrentLifetimeOrderCard
-                    order={data}
-                    config={billingConfig}
-                  />
-                )}
+        <If condition={data}>
+          {(data) => (
+            <div className={'flex w-full max-w-2xl flex-col space-y-6'}>
+              {'active' in data ? (
+                <CurrentSubscriptionCard
+                  subscription={data}
+                  config={billingConfig}
+                />
+              ) : (
+                <CurrentLifetimeOrderCard order={data} config={billingConfig} />
+              )}
 
-                <If condition={!data}>
-                  <PersonalAccountCheckoutForm customerId={customerId} />
-                </If>
+              <If condition={!data}>
+                <PersonalAccountCheckoutForm customerId={customerId} />
+              </If>
 
-                <If condition={customerId}>
-                  <CustomerBillingPortalForm />
-                </If>
-              </div>
-            )}
-          </If>
-        </div>
-      </PageBody>
+              <If condition={customerId}>
+                <CustomerBillingPortalForm />
+              </If>
+            </div>
+          )}
+        </If>
+      </div>
     </>
   );
 }

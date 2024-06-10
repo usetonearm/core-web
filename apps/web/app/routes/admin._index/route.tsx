@@ -34,9 +34,7 @@ export default function AdminPage() {
         description={`Your SaaS stats at a glance`}
       />
 
-      <PageBody>
-        <AdminDashboard data={data} />
-      </PageBody>
+      <AdminDashboard data={data} />
     </>
   );
 }

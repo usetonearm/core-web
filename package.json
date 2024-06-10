@@ -7,7 +7,7 @@
   },
   "author": {
     "url": "https://broadcasthound.com",
-    "name": "BroadcastHound"
+    "name": "Broadcast Hound"
   },
   "scripts": {
     "build": "turbo build --cache-dir=.turbo",

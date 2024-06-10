@@ -55,11 +55,9 @@ export default function TeamAccountHomePage() {
         </Button>
       </TeamAccountLayoutPageHeader>
 
-      <PageBody>
-        <ClientOnly>
-          <DashboardDemo />
-        </ClientOnly>
-      </PageBody>
+      <ClientOnly>
+        <DashboardDemo />
+      </ClientOnly>
     </>
   );
 }

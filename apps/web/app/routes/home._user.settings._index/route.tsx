@@ -61,15 +61,14 @@ export default function PersonalAccountSettingsPage() {
         title={<Trans i18nKey={'account:accountTabLabel'} />}
         description={<Trans i18nKey={'account:accountTabDescription'} />}
       />
-      <PageBody>
-        <div className={'flex w-full flex-1 flex-col lg:max-w-2xl'}>
-          <PersonalAccountSettingsContainer
-            userId={userId}
-            features={features}
-            paths={paths}
-          />
-        </div>
-      </PageBody>
+
+      <div className={'flex w-full flex-1 flex-col lg:max-w-2xl'}>
+        <PersonalAccountSettingsContainer
+          userId={userId}
+          features={features}
+          paths={paths}
+        />
+      </div>
     </>
   );
 }

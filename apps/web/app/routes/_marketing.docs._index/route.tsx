@@ -41,16 +41,14 @@ export default function DocsPage() {
   const cards = (data?.pages ?? []).filter((item) => !item.parentId);
 
   return (
-    <PageBody>
-      <div className={'flex flex-col space-y-8 xl:space-y-16'}>
-        <SitePageHeader title={title} subtitle={description} />
+    <div className={'flex flex-col space-y-8 xl:space-y-16'}>
+      <SitePageHeader title={title} subtitle={description} />
 
-        <div className={'flex flex-col items-center'}>
-          <div className={'container mx-auto max-w-5xl'}>
-            <DocsCards cards={cards as Cms.ContentItem[]} />
-          </div>
+      <div className={'flex flex-col items-center'}>
+        <div className={'container mx-auto max-w-5xl'}>
+          <DocsCards cards={cards as Cms.ContentItem[]} />
         </div>
       </div>
-    </PageBody>
+    </div>
   );
 }
