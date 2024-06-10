@@ -51,12 +51,16 @@ export default function App() {
   return (
     <html lang={language} className={className}>
       <head>
+        <script
+          defer
+          data-domain="broadcasthound.com"
+          src="https://plausible.io/js/script.js"
+        />
         <RootHead />
         <Meta />
         <Links />
         <CsrfTokenMeta csrf={data.csrfToken} />
       </head>
-
       <body>
         <RootProviders theme={theme} language={language}>
           <Outlet />
