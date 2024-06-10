@@ -1,0 +1,5 @@
+requests
+supabase
+pydub
+numpy
+schedule
