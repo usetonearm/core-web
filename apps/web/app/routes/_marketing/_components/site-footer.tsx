@@ -18,7 +18,7 @@ export function SiteFooter() {
           >
             <div className={'flex flex-col space-y-4'}>
               <div>
-                <AppLogo className={'w-[85px] md:w-[95px]'} />
+                <AppLogo className={'w-[120px] md:w-[140px]'} />
               </div>
 
               <div className={'flex flex-col space-y-4'}>

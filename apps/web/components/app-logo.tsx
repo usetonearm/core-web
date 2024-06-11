@@ -4,7 +4,7 @@ import { cn } from '@kit/ui/utils';
 
 function LogoImage({
   className,
-  width = 105,
+  width = 140,
 }: {
   className?: string;
   width?: number;

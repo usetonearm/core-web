@@ -12,7 +12,10 @@ export function AuthLayoutShell({
         ' animate-in fade-in slide-in-from-top-8 zoom-in-95 duration-1000'
       }
     >
-      {Logo && <Logo />}
+      {Logo && (
+        //@ts-ignore
+        <Logo className={'w-[220px]'} />
+      )}
 
       <div
         className={`bg-background dark:border-border flex w-full max-w-sm flex-col items-center space-y-5 rounded-lg border-transparent px-6 md:w-8/12 md:border md:px-8 md:py-6 md:shadow lg:w-5/12 lg:px-6 xl:w-4/12 xl:py-8 2xl:w-3/12 dark:shadow`}

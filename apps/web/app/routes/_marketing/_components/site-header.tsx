@@ -15,7 +15,7 @@ export function SiteHeader(props: { user?: User | null }) {
       <div className={'px-4 lg:px-8'}>
         <div className="grid h-14 grid-cols-3 items-center">
           <div>
-            <AppLogo />
+            <AppLogo className={'w-[140px]'} />
           </div>
 
           <div className={'order-first md:order-none'}>
