@@ -1,5 +1,6 @@
 import { Outlet, json, useLoaderData } from '@remix-run/react';
 import type { LoaderFunctionArgs } from '@remix-run/server-runtime';
+import { ThemeProvider } from 'next-themes';
 
 import { getSupabaseServerClient } from '@kit/supabase/server-client';
 
@@ -22,10 +23,18 @@ export default function MarketingLayout() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className={'light flex min-h-[100vh] flex-col'}>
-      <SiteHeader user={data.user} />
-      <Outlet />
-      <SiteFooter />
-    </div>
+    <ThemeProvider
+      attribute="class"
+      enableSystem
+      disableTransitionOnChange
+      defaultTheme="light"
+      enableColorScheme={false}
+    >
+      <div className={'light flex min-h-[100vh] flex-col'}>
+        <SiteHeader user={data.user} />
+        <Outlet />
+        <SiteFooter />
+      </div>
+    </ThemeProvider>
   );
 }

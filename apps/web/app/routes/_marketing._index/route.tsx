@@ -165,12 +165,12 @@ export default function Index() {
                 <figcaption className="mt-6 flex items-center justify-center space-x-3">
                   <img
                     className="h-6 w-6 rounded-full"
-                    src="https://media.licdn.com/dms/image/D5603AQERKhAF1LaBZQ/profile-displayphoto-shrink_200_200/0/1667265040428?e=2147483647&v=beta&t=p8u7RuiinqbR2Zaha3t0ew-mM1jsth0Smm1T9NvskbU"
+                    // src="https://media.licdn.com/dms/image/D5603AQERKhAF1LaBZQ/profile-displayphoto-shrink_200_200/0/1667265040428?e=2147483647&v=beta&t=p8u7RuiinqbR2Zaha3t0ew-mM1jsth0Smm1T9NvskbU"
                     alt="profile picture"
                   />
                   <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                     <div className="pr-3 font-medium text-gray-900 dark:text-white">
-                      Isaac Scott
+                      {/* Isaac Scott */}
                     </div>
                     <div className="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">
                       Operations Director at Nomad Radio
@@ -311,9 +311,7 @@ export default function Index() {
             <Pill>Get started for free. No credit card required.</Pill>
 
             <div className={'flex flex-col space-y-2'}>
-              <Heading level={1}>
-                Fair pricing for all types of businesses
-              </Heading>
+              <Heading level={1}>Fair pricing for all stations</Heading>
 
               <Heading
                 level={2}

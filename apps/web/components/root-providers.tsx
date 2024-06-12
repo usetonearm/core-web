@@ -34,27 +34,14 @@ export function RootProviders(
     <Suspense>
       <I18nProvider settings={settings} resolver={i18nResolver}>
         <Toaster richColors={false} />
-
         <ClientOnly>
           <GlobalLoader displaySpinner={false} />
         </ClientOnly>
-
         <ReactQueryProvider>
           <MonitoringProvider>
             <CaptchaProvider>
               <CaptchaTokenSetter siteKey={captchaSiteKey} />
-
-              <AuthProvider>
-                <ThemeProvider
-                  attribute="class"
-                  enableSystem
-                  disableTransitionOnChange
-                  defaultTheme={props.theme}
-                  enableColorScheme={false}
-                >
-                  {props.children}
-                </ThemeProvider>
-              </AuthProvider>
+              <AuthProvider>{props.children}</AuthProvider>
             </CaptchaProvider>
           </MonitoringProvider>
         </ReactQueryProvider>

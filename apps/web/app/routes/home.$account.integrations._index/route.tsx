@@ -80,7 +80,13 @@ export default function TeamStreamsPage() {
   );
 }
 
-function IntegrationCard({ title, description, Logo }) {
+interface IntegrationProps {
+  title: string;
+  description: string;
+  Logo: React.ComponentType;
+}
+
+function IntegrationCard({ title, description, Logo }: IntegrationProps) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between gap-4 space-y-0">

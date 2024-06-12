@@ -1,5 +1,6 @@
 import { Link, Outlet, json, useLoaderData } from '@remix-run/react';
 import { LoaderFunctionArgs } from '@remix-run/server-runtime';
+import { ThemeProvider } from 'next-themes';
 
 import { Database } from '@kit/supabase/database';
 import { Button } from '@kit/ui/button';
@@ -38,27 +39,35 @@ export default function UserHomeLayout() {
   const { workspace, style } = useLoaderData<typeof loader>();
 
   return (
-    <Page style={style}>
-      <PageNavigation>
-        <If condition={style === 'header'}>
-          <HomeMenuNavigation workspace={workspace} />
-        </If>
+    <ThemeProvider
+      attribute="class"
+      enableSystem
+      disableTransitionOnChange
+      defaultTheme="dark"
+      enableColorScheme={false}
+    >
+      <Page style={style}>
+        <PageNavigation>
+          <If condition={style === 'header'}>
+            <HomeMenuNavigation workspace={workspace} />
+          </If>
 
-        <If condition={style === 'sidebar'}>
-          <HomeSidebar workspace={workspace} />
-        </If>
-      </PageNavigation>
+          <If condition={style === 'sidebar'}>
+            <HomeSidebar workspace={workspace} />
+          </If>
+        </PageNavigation>
 
-      <PageMobileNavigation className={'flex items-center justify-between'}>
-        <AppLogo href={pathsConfig.app.home} />
+        <PageMobileNavigation className={'flex items-center justify-between'}>
+          <AppLogo href={pathsConfig.app.home} />
 
-        <HomeMobileNavigation workspace={workspace} />
-      </PageMobileNavigation>
+          <HomeMobileNavigation workspace={workspace} />
+        </PageMobileNavigation>
 
-      <div className="mx-auto w-full max-w-screen-lg px-4 py-12">
-        <Outlet />
-      </div>
-    </Page>
+        <div className="mx-auto w-full max-w-screen-lg px-4 py-12">
+          <Outlet />
+        </div>
+      </Page>
+    </ThemeProvider>
   );
 }
 
