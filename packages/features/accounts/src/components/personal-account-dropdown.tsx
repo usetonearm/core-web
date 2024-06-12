@@ -10,6 +10,7 @@ import {
   Home,
   LogOut,
   MessageCircleQuestion,
+  Settings,
   Shield,
 } from 'lucide-react';
 
@@ -50,7 +51,7 @@ export function PersonalAccountDropdown({
   showProfileName?: boolean;
 
   paths: {
-    home: string;
+    settings: string;
   };
 
   features: {
@@ -146,24 +147,12 @@ export function PersonalAccountDropdown({
         <DropdownMenuItem asChild>
           <Link
             className={'s-full flex items-center space-x-2'}
-            to={paths.home}
+            to={paths.settings}
           >
-            <Home className={'h-5'} />
+            <Settings className={'h-5'} />
 
             <span>
-              <Trans i18nKey={'common:homeTabLabel'} />
-            </span>
-          </Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuItem asChild>
-          <Link className={'s-full flex items-center space-x-2'} to={'/docs'}>
-            <MessageCircleQuestion className={'h-5'} />
-
-            <span>
-              <Trans i18nKey={'common:documentation'} />
+              <Trans i18nKey={'common:settingsTabLabel'} />
             </span>
           </Link>
         </DropdownMenuItem>
@@ -183,9 +172,8 @@ export function PersonalAccountDropdown({
           </DropdownMenuItem>
         </If>
 
-        <DropdownMenuSeparator />
-
         <If condition={features.enableThemeToggle}>
+          <DropdownMenuSeparator />
           <SubMenuModeToggle />
         </If>
 

@@ -36,8 +36,6 @@ export const loader = async (args: LoaderFunctionArgs) => {
   const api = createTeamAccountsApi(supabase);
   const workspace = await api.getAccountWorkspace(account);
 
-  console.log(workspace.data);
-
   return {
     title,
     account,

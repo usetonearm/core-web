@@ -159,8 +159,6 @@ export function AccountSelector({
           collisionPadding={20}
         >
           <Command>
-            <CommandInput placeholder={t('searchAccount')} className="h-9" />
-
             <CommandList>
               <CommandGroup>
                 <CommandItem

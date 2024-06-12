@@ -1,6 +1,9 @@
-import { Outlet, json, useLoaderData } from '@remix-run/react';
+import { Link, Outlet, json, useLoaderData } from '@remix-run/react';
 import { LoaderFunctionArgs } from '@remix-run/server-runtime';
 
+import { Database } from '@kit/supabase/database';
+import { Button } from '@kit/ui/button';
+import { Card, CardFooter, CardHeader } from '@kit/ui/card';
 import { If } from '@kit/ui/if';
 import {
   Page,
@@ -15,6 +18,7 @@ import { personalAccountNavigationConfig } from '~/config/personal-account-navig
 import { layoutStyleCookie } from '~/lib/cookies';
 import { loadUserWorkspace } from '~/routes/home._user/_lib/load-user-workspace.server';
 
+import { HomeAccountsList } from './_components/home-accounts-list';
 // home imports
 import { HomeMenuNavigation } from './_components/home-menu-navigation';
 import { HomeMobileNavigation } from './_components/home-mobile-navigation';
@@ -51,7 +55,9 @@ export default function UserHomeLayout() {
         <HomeMobileNavigation workspace={workspace} />
       </PageMobileNavigation>
 
-      <Outlet />
+      <div className="mx-auto w-full max-w-screen-lg px-4 py-12">
+        <Outlet />
+      </div>
     </Page>
   );
 }

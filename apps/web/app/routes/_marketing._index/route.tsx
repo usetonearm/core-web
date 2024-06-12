@@ -1,9 +1,13 @@
 import { Link } from '@remix-run/react';
 import {
+  Bell,
   ChevronRight,
   CreditCard,
+  Grid2x2Check,
   LayoutDashboard,
   Lock,
+  Quote,
+  Radio,
   Sparkle,
 } from 'lucide-react';
 
@@ -38,11 +42,7 @@ export default function Index() {
 
             <div className={'flex flex-col items-center space-y-8'}>
               <HeroTitle>
-                <span>The stream monitoring solution</span>
-
-                <span>
-                  <span>for every source of audio</span>
-                </span>
+                <span>No more dead air.</span>
               </HeroTitle>
 
               <div className={'flex flex-col'}>
@@ -52,7 +52,7 @@ export default function Index() {
                     'text-muted-foreground p-0 text-center font-sans text-2xl font-normal'
                   }
                 >
-                  <span>Build and launch a SaaS in days, not months</span>
+                  <span>Ensure the best experience for all of</span>
                 </Heading>
 
                 <Heading
@@ -61,7 +61,7 @@ export default function Index() {
                     'text-muted-foreground p-0 text-center font-sans text-2xl font-normal'
                   }
                 >
-                  <span>Focus on your business, not on the tech</span>
+                  <span>your listeners. Detect silence and</span>
                 </Heading>
 
                 <Heading
@@ -70,7 +70,7 @@ export default function Index() {
                     'text-muted-foreground p-0 text-center font-sans text-2xl font-normal'
                   }
                 >
-                  Ship something great, today.
+                  outages in realtime.
                 </Heading>
               </div>
 
@@ -119,10 +119,67 @@ export default function Index() {
                 level={2}
                 className={'text-muted-foreground font-sans font-normal'}
               >
-                Unbeatable Features and Benefits for Your SaaS Business
+                Trusted by radio station operators around the world
               </Heading>
             </div>
           </div>
+          {/* <div className="text-primary max-sm max-w-lg flex-col gap-2 rounded-lg bg-green-50 p-4 shadow-md">
+            <Quote />
+            <div>
+              Broadcast Hound was pivotal in running Nomad Radio. We had
+              residents coming in and out of our studio and needed a way to
+              ensure there was no dead air as shows changed hosts.
+            </div>
+            <div className="flex items-center gap-3 text-sm">
+              <img
+                className="h-12 w-12 rounded-full"
+                src="https://media.licdn.com/dms/image/D5603AQERKhAF1LaBZQ/profile-displayphoto-shrink_200_200/0/1667265040428?e=2147483647&v=beta&t=p8u7RuiinqbR2Zaha3t0ew-mM1jsth0Smm1T9NvskbU"
+              />
+              <div className="flex-column">
+                <div className="font-semibold">Isaac Scott</div>
+                <div>Operations Director at Nomad Radio</div>
+              </div>
+            </div>
+          </div> */}
+          <section className="bg-white dark:bg-gray-900">
+            <div className="mx-auto max-w-screen-xl px-4 py-8 text-center lg:px-6 lg:py-16">
+              <figure className="mx-auto max-w-screen-md">
+                <svg
+                  className="mx-auto mb-3 h-12 text-gray-400 dark:text-gray-600"
+                  viewBox="0 0 24 27"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <blockquote>
+                  <p className="text-2xl font-medium text-gray-900 dark:text-white">
+                    Broadcast Hound was pivotal in running Nomad Radio. We had
+                    residents coming in and out of our studio and needed a way
+                    to ensure there was no dead air as shows changed hosts.
+                  </p>
+                </blockquote>
+                <figcaption className="mt-6 flex items-center justify-center space-x-3">
+                  <img
+                    className="h-6 w-6 rounded-full"
+                    src="https://media.licdn.com/dms/image/D5603AQERKhAF1LaBZQ/profile-displayphoto-shrink_200_200/0/1667265040428?e=2147483647&v=beta&t=p8u7RuiinqbR2Zaha3t0ew-mM1jsth0Smm1T9NvskbU"
+                    alt="profile picture"
+                  />
+                  <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
+                    <div className="pr-3 font-medium text-gray-900 dark:text-white">
+                      Isaac Scott
+                    </div>
+                    <div className="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">
+                      Operations Director at Nomad Radio
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          </section>
         </div>
       </div>
 
@@ -134,27 +191,26 @@ export default function Index() {
             <FeatureContainer>
               <div className={'flex flex-col space-y-6'}>
                 <IconContainer className={'bg-green-50 dark:bg-green-500/10'}>
-                  <Lock className={'h-5 text-green-500'} />
+                  <Radio className={'h-5 text-green-500'} />
                 </IconContainer>
 
                 <div className={'flex flex-col'}>
-                  <Heading level={2}>Authentication</Heading>
+                  <Heading level={2}>Enterprise ready monitoring</Heading>
 
                   <Heading
                     level={3}
                     className={'text-muted-foreground font-sans font-normal'}
                   >
-                    Secure and Easy-to-Use Authentication for Your SaaS Website
-                    and API
+                    Highly robust monitoring for your station
                   </Heading>
                 </div>
               </div>
 
               <div>
-                Our authentication system is built on top of the
-                industry-leading PaaS such as Supabase and Firebase. It is
-                secure, easy-to-use, and fully customizable. It supports
-                email/password, social logins, and more.
+                Monitor unlimited streams for downtime and detect silence
+                instantly. Ensure your streams are always online and your
+                listeners never miss a beat with our automated monitoring
+                solution.
               </div>
             </FeatureContainer>
 
@@ -172,10 +228,9 @@ export default function Index() {
           <FeatureShowcaseContainer>
             <FeatureContainer reverse>
               <img
-                className="rounded-2xl"
-                src={'/images/dashboard.webp'}
-                width={'2004'}
-                height={'1410'}
+                src={'/images/notifications.png'}
+                width={'300'}
+                height={'auto'}
                 alt={'Dashboard'}
               />
             </FeatureContainer>
@@ -183,25 +238,26 @@ export default function Index() {
             <FeatureContainer>
               <div className={'flex flex-col space-y-6'}>
                 <IconContainer className={'bg-indigo-50 dark:bg-indigo-500/10'}>
-                  <LayoutDashboard className={'h-5 text-indigo-500'} />
+                  <Bell className={'h-5 text-indigo-500'} />
                 </IconContainer>
 
                 <div className={'flex flex-col'}>
-                  <Heading level={2}>Dashboard</Heading>
+                  <Heading level={2}>Alerts & Notifications</Heading>
 
                   <Heading
                     level={3}
                     className={'text-muted-foreground font-sans font-normal'}
                   >
-                    A fantastic dashboard to manage your SaaS business
+                    Integrate into your existing notification platform
                   </Heading>
                 </div>
               </div>
 
               <div>
-                Our dashboard offers an overview of your SaaS business. It shows
-                at a glance all you need to know about your business. It is
-                fully customizable and extendable.
+                Stay informed with real-time notifications. Receive push alerts
+                via email, text, Slack, or Discord whenever there's an issue
+                with your streams. Never miss an important update about your
+                stream's status.
               </div>
             </FeatureContainer>
           </FeatureShowcaseContainer>
@@ -210,25 +266,25 @@ export default function Index() {
             <FeatureContainer>
               <div className={'flex flex-col space-y-6'}>
                 <IconContainer className={'bg-blue-50 dark:bg-blue-500/10'}>
-                  <CreditCard className={'h-5 text-blue-500'} />
+                  <Grid2x2Check className={'h-5 text-blue-500'} />
                 </IconContainer>
 
                 <div className={'flex flex-col'}>
-                  <Heading level={2}>Billing</Heading>
+                  <Heading level={2}>Ready to use</Heading>
 
                   <Heading
                     level={3}
                     className={'text-muted-foreground font-sans font-normal'}
                   >
-                    A powerful billing system for your SaaS business
+                    Built in support for the biggest radio platforms
                   </Heading>
                 </div>
               </div>
 
               <div>
-                Powerful billing system that supports multiple payment gateways
-                such as Stripe, Lemon Squeezy and Paddle. Fully customizable and
-                easy to use.
+                Out-of-the-box compatibility with popular platforms like
+                Radio.co, Airtime.pro, Libretime, and Radio Cult. Integrate
+                seamlessly and start monitoring your streams right away.
               </div>
             </FeatureContainer>
 
@@ -263,7 +319,7 @@ export default function Index() {
                 level={2}
                 className={'text-muted-foreground font-sans font-normal'}
               >
-                Get started on our free plan and upgrade when you are ready.
+                Monitoring that won't break the budget
               </Heading>
             </div>
           </div>
@@ -299,10 +355,10 @@ function Pill(props: React.PropsWithChildren) {
   return (
     <h2
       className={
-        'text-muted-foreground dark:shadow-primary/20 rounded-full px-4 py-2 text-center text-sm shadow'
+        'text-muted-foreground dark:shadow-primary/20 rounded-full border-2 border-green-300 bg-green-50 px-4 py-2 text-center text-sm text-green-700 shadow'
       }
     >
-      <Sparkle className={'inline-block h-4'} />
+      <Sparkle className={'inline-block h-4 text-green-700'} />
       {props.children}
     </h2>
   );
@@ -345,17 +401,17 @@ function FeatureContainer(
 function MainCallToActionButton() {
   return (
     <div className={'flex space-x-2'}>
-      <Button asChild variant={'link'}>
+      {/* <Button asChild variant={'link'}>
         <Link to={'/docs'}>
           <Trans i18nKey={'common:documentation'} />
         </Link>
-      </Button>
+      </Button> */}
 
       <Button asChild>
         <Link to={'/auth/sign-up'}>
           <span className={'flex items-center space-x-0.5'}>
             <span>
-              <Trans i18nKey={'common:getStarted'} />
+              <Trans i18nKey={'common:getStartedForFree'} />
             </span>
 
             <ChevronRight

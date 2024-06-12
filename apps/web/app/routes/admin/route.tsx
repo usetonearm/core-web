@@ -38,7 +38,9 @@ export default function AdminLayout() {
         <AdminMobileNavigation />
       </PageMobileNavigation>
 
-      <Outlet />
+      <div className="mx-auto w-full max-w-screen-lg px-4 py-12">
+        <Outlet />
+      </div>
     </Page>
   );
 }

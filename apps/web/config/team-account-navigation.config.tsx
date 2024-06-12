@@ -1,6 +1,7 @@
 import {
   CreditCard,
   LayoutDashboard,
+  Plug,
   RadioTower,
   Settings,
   Users,
@@ -24,6 +25,12 @@ const getRoutes = (account: string) => [
     label: 'common:streamsTabLabel',
     path: pathsConfig.app.accountStreams.replace('[account]', account),
     Icon: <RadioTower className={iconClasses} />,
+    end: false,
+  },
+  {
+    label: 'common:integrationsTabLabel',
+    path: pathsConfig.app.accountIntegrations.replace('[account]', account),
+    Icon: <Plug className={iconClasses} />,
     end: true,
   },
   {

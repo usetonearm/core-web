@@ -22,7 +22,7 @@ export default function MarketingLayout() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className={'flex min-h-[100vh] flex-col'}>
+    <div className={'light flex min-h-[100vh] flex-col'}>
       <SiteHeader user={data.user} />
       <Outlet />
       <SiteFooter />

@@ -59,9 +59,7 @@ export function TeamAccountNavigationMenu(props: {
             image: account.picture_url,
           }))}
         />
-
         <TeamAccountNotifications accountId={account.id} userId={user.id} />
-
         <ProfileAccountDropdownContainer
           collapsed={true}
           user={user}

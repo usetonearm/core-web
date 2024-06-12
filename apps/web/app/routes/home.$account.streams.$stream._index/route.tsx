@@ -210,7 +210,7 @@ export default function StreamPage() {
 
           <div
             className={
-              'grid grid-cols-1 gap-4 md:grid-cols-1 xl:grid-cols-3' +
+              'grid grid-cols-1 gap-4 md:grid-cols-3 xl:grid-cols-3' +
               ' mt-4 2xl:grid-cols-3'
             }
           >

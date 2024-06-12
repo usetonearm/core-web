@@ -19,25 +19,7 @@ export function HomeAccountsList({
 }: {
   accounts: UserWorkspace['accounts'];
 }) {
-  if (!accounts.length) {
-    return <HomeAccountsListEmptyState />;
-  }
-
-  return (
-    <div className="flex flex-col">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {accounts.map((account) => (
-          <CardButton key={account.value} asChild>
-            <Link to={`/home/${account.value}`}>
-              <CardButtonHeader>
-                <CardButtonTitle>{account.label}</CardButtonTitle>
-              </CardButtonHeader>
-            </Link>
-          </CardButton>
-        ))}
-      </div>
-    </div>
-  );
+  return <HomeAccountsListEmptyState />;
 }
 
 function HomeAccountsListEmptyState() {

@@ -107,9 +107,14 @@ export function SiteFooter() {
                 </FooterSectionHeading>
 
                 <FooterSectionList>
-                  <FooterLink>
+                  {/* <FooterLink>
                     <Link to={'/docs'}>
                       <Trans i18nKey={'marketing:documentation'} />
+                    </Link>
+                  </FooterLink> */}
+                  <FooterLink>
+                    <Link to={'https://broadcasthound.betteruptime.com/'}>
+                      <Trans i18nKey={'marketing:statusPage'} />
                     </Link>
                   </FooterLink>
                 </FooterSectionList>

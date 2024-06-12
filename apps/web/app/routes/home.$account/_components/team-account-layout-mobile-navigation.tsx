@@ -78,7 +78,6 @@ export const TeamAccountLayoutMobileNavigation = (
       <DropdownMenuTrigger>
         <Menu className={'h-9'} />
       </DropdownMenuTrigger>
-
       <DropdownMenuContent sideOffset={10} className={'w-screen rounded-none'}>
         <TeamAccountsModal userId={props.userId} accounts={props.accounts} />
 
