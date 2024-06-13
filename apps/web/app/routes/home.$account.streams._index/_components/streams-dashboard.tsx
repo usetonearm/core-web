@@ -37,6 +37,9 @@ import {
   TooltipTrigger,
 } from '@kit/ui/tooltip';
 
+import AddStreamDialog from './add-stream';
+import { EmptyStreamsPlaceholder } from './empty-streams-placeholder';
+
 type Stream = Database['public']['Tables']['streams']['Row'];
 
 type StreamsDashboardProps = {
@@ -49,10 +52,16 @@ export default function StreamsDashboard({
   account,
 }: StreamsDashboardProps) {
   return (
-    <div className={'flex flex-col space-y-6 pb-36'}>
-      <div className={'grid grid-cols-1 gap-4'}>
-        {streams?.map((stream: Stream) => StreamListItem(stream, account))}
-      </div>
+    <div>
+      {streams.length > 0 ? (
+        <div className={'flex flex-col space-y-6 pb-36'}>
+          <div className={'grid grid-cols-1 gap-4'}>
+            {streams?.map((stream: Stream) => StreamListItem(stream, account))}
+          </div>
+        </div>
+      ) : (
+        <EmptyStreamsPlaceholder account={account} />
+      )}
     </div>
   );
 }

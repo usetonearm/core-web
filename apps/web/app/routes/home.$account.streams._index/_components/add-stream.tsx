@@ -17,8 +17,6 @@ import {
 import { Input } from '@kit/ui/input';
 import { Label } from '@kit/ui/label';
 
-import { loadTeamWorkspace } from '~/routes/home.$account/_lib/team-account-workspace-loader.server';
-
 type AddStreamProps = {
   account: string;
 };
@@ -28,7 +26,7 @@ interface FormValues {
   url: string;
 }
 
-export default function AddStream({ account }: AddStreamProps) {
+export default function AddStreamDialog({ account }: AddStreamProps) {
   const {
     register,
     handleSubmit,

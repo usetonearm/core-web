@@ -93,7 +93,9 @@ function IntegrationCard({ title, description, Logo }: IntegrationProps) {
         </div>
         <div>
           <div className="text-md font-bold">{title}</div>
-          <div className="text-sm text-gray-400">{description}</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">
+            {description}
+          </div>
         </div>
         <Button>Coming soon</Button>
       </CardHeader>

@@ -15,7 +15,7 @@ import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
 import { requireUserLoader } from '~/lib/require-user-loader';
 import { TeamAccountLayoutPageHeader } from '~/routes/home.$account/_components/team-account-layout-page-header';
 
-import AddStream from './_components/add-stream';
+import AddStreamDialog from './_components/add-stream';
 
 const StreamsDashboard = lazy(() => import('./_components/streams-dashboard'));
 
@@ -62,7 +62,7 @@ export default function TeamStreamsPage() {
         title={<Trans i18nKey={'common:streamsTabLabel'} />}
         description={<Trans i18nKey={'common:streamsTabDescription'} />}
       >
-        <AddStream account={data.accountId as string} />
+        <AddStreamDialog account={data.accountId as string} />
       </TeamAccountLayoutPageHeader>
 
       <ClientOnly>

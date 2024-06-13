@@ -43,7 +43,7 @@ export default function UserHomeLayout() {
       attribute="class"
       enableSystem
       disableTransitionOnChange
-      defaultTheme="dark"
+      defaultTheme="light"
       enableColorScheme={false}
     >
       <Page style={style}>

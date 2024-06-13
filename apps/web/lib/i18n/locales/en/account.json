@@ -110,6 +110,8 @@
   "language": "Language",
   "languageDescription": "Choose your preferred language",
   "noTeamsYet": "You don't have any teams yet.",
+  "noStreamsYet": "You're not monitoring any streams yet!",
+  "createStream": "Add a stream to start monitoring for downtime and silence.",
   "createTeam": "Create a team to get started.",
   "createTeamButtonLabel": "Create a Team"
 }

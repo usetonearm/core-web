@@ -28,15 +28,15 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function UserHomePage() {
   const { workspace } = useLoaderData<typeof loader>();
 
+  console.log(workspace.accounts);
+
   return (
     <>
       <PageHeader
         title={<Trans i18nKey={'common:homeTabLabel'} />}
         description={<Trans i18nKey={'common:homeTabDescription'} />}
       />
-      {!workspace.accounts ? (
-        <HomeAccountsList accounts={workspace.accounts} />
-      ) : (
+      {workspace.accounts.length > 0 ? (
         <div
           className={
             'grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-2' +
@@ -48,6 +48,8 @@ export default function UserHomePage() {
             <AccountCard {...account} />
           ))}
         </div>
+      ) : (
+        <HomeAccountsList accounts={workspace.accounts} />
       )}
     </>
   );
