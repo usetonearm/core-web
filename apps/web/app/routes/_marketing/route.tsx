@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 
 import { getSupabaseServerClient } from '@kit/supabase/server-client';
 
+import { SiteBanner } from './_components/site-banner';
 // local imports
 import { SiteFooter } from './_components/site-footer';
 import { SiteHeader } from './_components/site-header';
@@ -31,6 +32,7 @@ export default function MarketingLayout() {
       enableColorScheme={false}
     >
       <div className={'light flex min-h-[100vh] flex-col'}>
+        <SiteBanner />
         <SiteHeader user={data.user} />
         <Outlet />
         <SiteFooter />

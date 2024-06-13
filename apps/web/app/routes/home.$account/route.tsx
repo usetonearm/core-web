@@ -1,5 +1,6 @@
 import { Outlet, json, useLoaderData } from '@remix-run/react';
 import { LoaderFunctionArgs } from '@remix-run/server-runtime';
+import { ThemeProvider } from 'next-themes';
 
 import { getSupabaseServerClient } from '@kit/supabase/server-client';
 import { If } from '@kit/ui/if';
@@ -46,39 +47,47 @@ export default function TeamWorkspaceLayout() {
   }));
 
   return (
-    <Page style={style}>
-      <PageNavigation>
-        <If condition={style === 'sidebar'}>
-          <TeamAccountLayoutSidebar
-            collapsed={false}
-            account={workspace.account.slug}
-            accountId={workspace.account.id}
-            accounts={accounts}
-            user={workspace.user}
-          />
-        </If>
+    <ThemeProvider
+      attribute="class"
+      enableSystem
+      disableTransitionOnChange
+      defaultTheme="light"
+      enableColorScheme={false}
+    >
+      <Page style={style}>
+        <PageNavigation>
+          <If condition={style === 'sidebar'}>
+            <TeamAccountLayoutSidebar
+              collapsed={false}
+              account={workspace.account.slug}
+              accountId={workspace.account.id}
+              accounts={accounts}
+              user={workspace.user}
+            />
+          </If>
 
-        <If condition={style === 'header'}>
-          <TeamAccountNavigationMenu workspace={workspace} />
-        </If>
-      </PageNavigation>
+          <If condition={style === 'header'}>
+            <TeamAccountNavigationMenu workspace={workspace} />
+          </If>
+        </PageNavigation>
 
-      <PageMobileNavigation className={'flex items-center justify-between'}>
-        <AppLogo href={pathsConfig.app.home} />
+        <PageMobileNavigation className={'flex items-center justify-between'}>
+          <AppLogo href={pathsConfig.app.home} />
 
-        <div className={'flex space-x-4'}>
-          <TeamAccountLayoutMobileNavigation
-            userId={workspace.user.id}
-            accounts={accounts}
-            account={workspace.account.slug}
-          />
+          <div className={'flex space-x-4'}>
+            <TeamAccountLayoutMobileNavigation
+              userId={workspace.user.id}
+              accounts={accounts}
+              account={workspace.account.slug}
+            />
+          </div>
+        </PageMobileNavigation>
+
+        <div className="mx-auto w-full max-w-screen-lg px-4 py-12">
+          <Outlet />
         </div>
-      </PageMobileNavigation>
-
-      <div className="mx-auto w-full max-w-screen-lg px-4 py-12">
-        <Outlet />
-      </div>
-    </Page>
+      </Page>
+    </ThemeProvider>
   );
 }
 

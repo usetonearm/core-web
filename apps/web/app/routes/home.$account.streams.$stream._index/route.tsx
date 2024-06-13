@@ -22,6 +22,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@kit/ui/alert-dialog';
+import { Badge } from '@kit/ui/badge';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -55,6 +56,10 @@ import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
 import { requireUserLoader } from '~/lib/require-user-loader';
 import { TeamAccountLayoutPageHeader } from '~/routes/home.$account/_components/team-account-layout-page-header';
 
+import StatusHistory from './_components/status-history';
+
+type StatusChange =
+  Database['public']['Functions']['get_status_changes_for_stream']['Returns'];
 type Check = Database['public']['Tables']['checks']['Row'];
 
 export const loader = async (args: LoaderFunctionArgs) => {
@@ -72,6 +77,11 @@ export const loader = async (args: LoaderFunctionArgs) => {
 
   if (!stream) return;
 
+  const { data: statusChanges, error: eventError } = await supabase.rpc(
+    'get_status_changes_for_stream',
+    { p_stream: args.params.stream as string },
+  );
+
   const account = args.params.account as string;
   const title = i18n.t('teams:home.pageTitle');
 
@@ -79,6 +89,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
     title,
     account,
     stream,
+    statusChanges,
   };
 };
 
@@ -168,7 +179,7 @@ export default function StreamPage() {
       </div>
       <ClientOnly>
         <div>
-          <div className="flex gap-2 text-slate-500">
+          <div className="flex flex-wrap gap-2 text-slate-500">
             <Button variant="ghost">
               <Send size="18" className="mr-2" />
               Send a test alert
@@ -216,7 +227,7 @@ export default function StreamPage() {
           >
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
+                <CardTitle className="text-sm font-medium text-gray-500">
                   Currently {data.stream.status === 'online' ? 'up' : 'down'}{' '}
                   for
                 </CardTitle>
@@ -251,7 +262,7 @@ export default function StreamPage() {
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
+                <CardTitle className="text-sm font-medium text-gray-500">
                   Last checked
                 </CardTitle>
               </CardHeader>
@@ -274,7 +285,7 @@ export default function StreamPage() {
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
+                <CardTitle className="text-sm font-medium text-gray-500">
                   Last outage
                 </CardTitle>
               </CardHeader>
@@ -296,9 +307,11 @@ export default function StreamPage() {
               </CardContent>
             </Card>
           </div>
+          {/*@ts-ignore*/}
+          <StatusHistory statusChanges={data.statusChanges} />
           <Card className="mt-4">
             <CardHeader>
-              <CardTitle>Latest checks</CardTitle>
+              <CardTitle className="text-lg">Latest checks</CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
@@ -310,12 +323,14 @@ export default function StreamPage() {
                 </TableHeader>
                 <TableBody>
                   {data.stream.checks.map((item) => (
-                    <TableRow>
+                    <TableRow id={item.id}>
                       <TableCell className="font-medium">
                         {format(item.created_at, 'MMMM dd, yyyy hh:mm:ss a')}
                       </TableCell>
                       <TableCell className="text-right">
-                        {item.status}
+                        <Badge className={getStatusColor(item.status)}>
+                          {capitalizeFirstLetter(item.status)}
+                        </Badge>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -337,4 +352,22 @@ export default function StreamPage() {
       </ClientOnly>
     </>
   );
+}
+
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'online':
+      return 'bg-green-500';
+    case 'down':
+      return 'bg-red-500';
+    case 'silence':
+      return 'bg-yellow-500';
+    default:
+      return 'bg-blue-500';
+  }
+};
+
+function capitalizeFirstLetter(string: string) {
+  if (!string) return string;
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

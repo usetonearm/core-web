@@ -902,6 +902,19 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: Json
       }
+      get_status_changes_for_stream: {
+        Args: {
+          p_stream: string
+        }
+        Returns: {
+          id: string
+          stream: string
+          status: string
+          created_at: string
+          previous_status: string
+          previous_created_at: string
+        }[]
+      }
       get_upper_system_role: {
         Args: Record<PropertyKey, never>
         Returns: string

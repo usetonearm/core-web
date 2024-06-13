@@ -52,6 +52,7 @@ export function PersonalAccountDropdown({
 
   paths: {
     settings: string;
+    home: string;
   };
 
   features: {
@@ -140,6 +141,21 @@ export function PersonalAccountDropdown({
               <span className={'block truncate'}>{signedInAsLabel}</span>
             </div>
           </div>
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem asChild>
+          <Link
+            className={'s-full flex items-center space-x-2'}
+            to={paths.home}
+          >
+            <Home className={'h-5'} />
+
+            <span>
+              <Trans i18nKey={'common:homeTabLabel'} />
+            </span>
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />

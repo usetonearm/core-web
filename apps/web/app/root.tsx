@@ -28,7 +28,6 @@ const csrfProtect = createCsrfProtect();
 export async function loader({ request }: LoaderFunctionArgs) {
   const { language } = await createI18nServerInstance(request);
   const theme = await getTheme(request);
-  console.log(theme);
   const className = getClassName(theme);
   const csrfToken = await csrfProtect(request);
 
