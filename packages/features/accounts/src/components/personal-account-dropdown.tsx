@@ -146,10 +146,7 @@ export function PersonalAccountDropdown({
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
-          <Link
-            className={'s-full flex items-center space-x-2'}
-            to={paths.home}
-          >
+          <Link className={'s-full flex items-center space-x-2'} to={'/home'}>
             <Home className={'h-5'} />
 
             <span>

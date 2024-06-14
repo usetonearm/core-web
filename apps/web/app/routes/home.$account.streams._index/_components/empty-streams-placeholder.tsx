@@ -4,10 +4,10 @@ import { Trans } from '@kit/ui/trans';
 import AddStreamDialog from './add-stream';
 
 interface Props {
-  account: string;
+  accountId: string;
 }
 
-export function EmptyStreamsPlaceholder({ account }: Props) {
+export function EmptyStreamsPlaceholder({ accountId }: Props) {
   return (
     <div className="flex flex-col items-center justify-center space-y-8 py-24">
       <div className="flex flex-col items-center space-y-1">
@@ -23,7 +23,7 @@ export function EmptyStreamsPlaceholder({ account }: Props) {
         </Heading>
       </div>
 
-      <AddStreamDialog account={account} />
+      <AddStreamDialog account={accountId} />
     </div>
   );
 }

@@ -45,22 +45,24 @@ type Stream = Database['public']['Tables']['streams']['Row'];
 type StreamsDashboardProps = {
   streams: Stream[] | null;
   account: string;
+  accountId: string;
 };
 
 export default function StreamsDashboard({
   streams,
   account,
+  accountId,
 }: StreamsDashboardProps) {
   return (
     <div>
-      {streams.length > 0 ? (
+      {streams && streams.length > 0 ? (
         <div className={'flex flex-col space-y-6 pb-36'}>
           <div className={'grid grid-cols-1 gap-4'}>
             {streams?.map((stream: Stream) => StreamListItem(stream, account))}
           </div>
         </div>
       ) : (
-        <EmptyStreamsPlaceholder account={account} />
+        <EmptyStreamsPlaceholder accountId={accountId} />
       )}
     </div>
   );
@@ -70,13 +72,13 @@ function StreamListItem(stream: Stream, account: string) {
   const color = useMemo(() => {
     switch (stream.status) {
       case 'online':
-        return 'text-green-400';
+        return 'text-green-600';
       case 'pending':
-        return 'text-yellow-400';
+        return 'text-yellow-600';
       case 'silence':
       case 'error':
       case 'down':
-        return 'text-red-400';
+        return 'text-red-600';
     }
   }, [stream.status]);
 

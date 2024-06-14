@@ -56,7 +56,10 @@ import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
 import { requireUserLoader } from '~/lib/require-user-loader';
 import { TeamAccountLayoutPageHeader } from '~/routes/home.$account/_components/team-account-layout-page-header';
 
+import { EmptyChecksPlaceholder } from './_components/empty-checks-placeholder';
+import { LatestChecks } from './_components/latest-checks';
 import StatusHistory from './_components/status-history';
+import { StreamStatCards } from './_components/stream-stat-cards';
 
 type StatusChange =
   Database['public']['Functions']['get_status_changes_for_stream']['Returns'];
@@ -154,6 +157,8 @@ export default function StreamPage() {
     }
   };
 
+  console.log(data.stream);
+
   return (
     <>
       <Breadcrumb>
@@ -178,172 +183,58 @@ export default function StreamPage() {
         ></TeamAccountLayoutPageHeader>
       </div>
       <ClientOnly>
-        <div>
-          <div className="flex flex-wrap gap-2 text-slate-500">
-            <Button variant="ghost">
-              <Send size="18" className="mr-2" />
-              Send a test alert
-            </Button>
-            <Button variant="ghost">
-              <Pause size="18" className="mr-2" />
-              Pause
-            </Button>
-            <Button variant="ghost">
-              <Cog size="18" className="mr-2" />
-              Edit
-            </Button>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="ghost">
-                  <Trash size="18" className="mr-2" />
+        <div className="flex flex-wrap gap-2 text-slate-500">
+          <Button variant="ghost">
+            <Send size="18" className="mr-2" />
+            Send a test alert
+          </Button>
+          <Button variant="ghost">
+            <Pause size="18" className="mr-2" />
+            Pause
+          </Button>
+          <Button variant="ghost">
+            <Cog size="18" className="mr-2" />
+            Edit
+          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="ghost">
+                <Trash size="18" className="mr-2" />
+                Delete
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Deleting this stream can not be undone. Please make sure you
+                  want to delete this before continuing.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={() => deleteStream(data.stream.id)}>
                   Delete
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Deleting this stream can not be undone. Please make sure you
-                    want to delete this before continuing.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => deleteStream(data.stream.id)}
-                  >
-                    Delete
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </div>
-
-          <div
-            className={
-              'grid grid-cols-1 gap-4 md:grid-cols-3 xl:grid-cols-3' +
-              ' mt-4 2xl:grid-cols-3'
-            }
-          >
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">
-                  Currently {data.stream.status === 'online' ? 'up' : 'down'}{' '}
-                  for
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
-                  {data.stream.last_outage ? (
-                    <div>
-                      {data.stream.last_online ? (
-                        <span>
-                          {formatDistance(
-                            new Date(data.stream.last_outage),
-                            new Date(),
-                            { includeSeconds: true },
-                          )}
-                        </span>
-                      ) : (
-                        <span>Forever</span>
-                      )}
-                    </div>
-                  ) : (
-                    <div>
-                      {formatDistance(
-                        new Date(data.stream.created_at),
-                        new Date(),
-                        { includeSeconds: true },
-                      )}
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">
-                  Last checked
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
-                  {data.stream.last_check ? (
-                    <span>
-                      {formatDistance(
-                        new Date(data.stream.last_check),
-                        new Date(),
-                        { includeSeconds: true },
-                      )}
-                      {' ago'}
-                    </span>
-                  ) : (
-                    <span>Never</span>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">
-                  Last outage
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
-                  {data.stream.last_outage ? (
-                    <div>
-                      {formatDistance(
-                        new Date(data.stream.last_outage),
-                        new Date(),
-                        { includeSeconds: true },
-                      )}
-                      {' ago'}
-                    </div>
-                  ) : (
-                    <div>Never</div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          {/*@ts-ignore*/}
-          <StatusHistory statusChanges={data.statusChanges} />
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitle className="text-lg">Latest checks</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[240px]">Time</TableHead>
-                    <TableHead className="text-right">Result</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {data.stream.checks.map((item) => (
-                    <TableRow id={item.id}>
-                      <TableCell className="font-medium">
-                        {format(item.created_at, 'MMMM dd, yyyy hh:mm:ss a')}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Badge className={getStatusColor(item.status)}>
-                          {capitalizeFirstLetter(item.status)}
-                        </Badge>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
+        {data.stream.checks && data?.stream?.checks.length > 0 ? (
+          <div className="flex-row gap-4">
+            <StreamStatCards stream={data.stream} />
+            {/*@ts-ignore*/}
+            <StatusHistory statusChanges={data.statusChanges} />
+            <LatestChecks checks={data.stream.checks} />
+          </div>
+        ) : (
+          <EmptyChecksPlaceholder />
+        )}
         <Alert className="m-auto mt-16 max-w-xl p-4">
           <BadgeHelp />
           <div className="ml-2">
-            <AlertTitle>Need a hand?</AlertTitle>
-            <AlertDescription>
+            <AlertTitle className="text-md">Need a hand?</AlertTitle>
+            <AlertDescription className="text-sm text-gray-600">
               Need some support? Reach out to our team at
               support@broadcasthound.com
             </AlertDescription>
@@ -352,22 +243,4 @@ export default function StreamPage() {
       </ClientOnly>
     </>
   );
-}
-
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case 'online':
-      return 'bg-green-500';
-    case 'down':
-      return 'bg-red-500';
-    case 'silence':
-      return 'bg-yellow-500';
-    default:
-      return 'bg-blue-500';
-  }
-};
-
-function capitalizeFirstLetter(string: string) {
-  if (!string) return string;
-  return string.charAt(0).toUpperCase() + string.slice(1);
 }

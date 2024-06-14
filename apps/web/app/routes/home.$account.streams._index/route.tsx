@@ -66,7 +66,11 @@ export default function TeamStreamsPage() {
       </TeamAccountLayoutPageHeader>
 
       <ClientOnly>
-        <StreamsDashboard streams={data.streams} account={data.account} />
+        <StreamsDashboard
+          streams={data.streams}
+          account={data.account}
+          accountId={data.accountId as string}
+        />
       </ClientOnly>
     </>
   );

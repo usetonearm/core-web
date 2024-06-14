@@ -46,8 +46,7 @@ export default function AddStreamDialog({ account }: AddStreamProps) {
       if (error) {
         console.error('Error inserting data:', error);
       } else {
-        console.log('Stream added successfully');
-        toast('Successfully added your stream to be monitored');
+        toast.success('Successfully added your stream to be monitored');
       }
     } catch (error) {
       console.error('Unexpected error inserting data:', error);
