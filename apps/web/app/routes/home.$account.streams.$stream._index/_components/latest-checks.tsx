@@ -68,7 +68,7 @@ export function LatestChecks({ checks }: LatestChecksProps) {
           </TableHeader>
           <TableBody>
             {checks.map((item) => (
-              <TableRow id={item.id}>
+              <TableRow id={item.id} key={item.id}>
                 <TableCell className="font-medium">
                   {format(item.created_at, 'MMMM dd, yyyy hh:mm:ss a')}
                 </TableCell>

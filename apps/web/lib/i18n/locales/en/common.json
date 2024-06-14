@@ -55,6 +55,7 @@
   "errorPageHeading": "Ouch! :|",
   "notifications": "Notifications",
   "noNotifications": "No notifications",
+  "nonAudioUrlError": "It looks like that URL isn't an audio stream. Did you input it correctly?",
   "justNow": "Just now",
   "roles": {
     "owner": {

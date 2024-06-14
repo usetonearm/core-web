@@ -67,6 +67,7 @@ import { TeamAccountLayoutPageHeader } from '~/routes/home.$account/_components/
 import { EmptyChecksPlaceholder } from './_components/empty-checks-placeholder';
 import { LatestChecks } from './_components/latest-checks';
 import StatusHistory from './_components/status-history';
+import { StreamHeader } from './_components/stream-header';
 import { StreamStatCards } from './_components/stream-stat-cards';
 import { sendTestEmailNotification } from './_lib/server/send-test-notification-email-action.server';
 
@@ -114,38 +115,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-function StatusIcon(
-  props: React.PropsWithChildren<{
-    status: 'online' | 'pending' | 'silence' | 'error' | 'down';
-  }>,
-) {
-  const color = useMemo(() => {
-    switch (props.status) {
-      case 'online':
-        return 'bg-green-400';
-      case 'pending':
-        return 'bg-yellow-400';
-      case 'silence':
-      case 'error':
-      case 'down':
-        return 'bg-red-400';
-    }
-  }, [props.status]);
-
-  return (
-    <div className="flex w-8 justify-center">
-      <div className="relative flex h-4 w-4">
-        <span
-          className={`absolute inline-flex h-full w-full animate-ping rounded-full ${color} opacity-75`}
-        ></span>
-        <span
-          className={`relative inline-flex h-4 w-4 rounded-full ${color}`}
-        ></span>
-      </div>
-    </div>
-  );
-}
-
 export default function StreamPage() {
   const { stream, account, email, title, statusChanges } =
     useLoaderData<typeof loader>();
@@ -161,7 +130,7 @@ export default function StreamPage() {
       } else {
         console.log('Stream deleted successfully');
         toast.success('Successfully deleted stream');
-        navigate(`/home/${data.account}/streams`);
+        navigate(`/home/${account}/streams`);
       }
     } catch (error) {
       console.error('Unexpected error deleting data:', error);
@@ -173,9 +142,9 @@ export default function StreamPage() {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <Link to={`/home/${account}/streams`}>
-              <BreadcrumbLink>Streams</BreadcrumbLink>
-            </Link>
+            <BreadcrumbLink asChild>
+              <Link to={`/home/${account}/streams`}>Streams</Link>
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -183,25 +152,21 @@ export default function StreamPage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="flex items-center gap-3 pt-2">
-        <StatusIcon status={stream.status} />
-        <TeamAccountLayoutPageHeader
-          account={account}
-          title={stream.title}
-          description={stream.url}
-        ></TeamAccountLayoutPageHeader>
-      </div>
+      <StreamHeader account={account} stream={stream} />
       <ClientOnly>
-        <div className="flex flex-wrap gap-2 text-slate-500">
+        <div className="flex flex-wrap gap-1 text-slate-500">
           <TestAlertButton email={email as string} />
-          <Button variant="ghost">
+          {/* <Button variant="ghost">
             <Pause size="18" className="mr-2" />
             Pause
-          </Button>
-          <Button variant="ghost">
-            <Cog size="18" className="mr-2" />
-            Edit
-          </Button>
+          </Button> */}
+
+          <Link to={`/home/${account}/streams/${stream.id}/edit`}>
+            <Button variant="ghost">
+              <Cog size="18" className="mr-2" />
+              Edit
+            </Button>
+          </Link>
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="ghost">

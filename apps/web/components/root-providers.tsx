@@ -33,7 +33,17 @@ export function RootProviders(
   return (
     <Suspense>
       <I18nProvider settings={settings} resolver={i18nResolver}>
-        <Toaster richColors={false} />
+        <Toaster
+          richColors={false}
+          toastOptions={{
+            classNames: {
+              error: 'bg-red-400',
+              success: 'text-green-400',
+              warning: 'text-yellow-400',
+              info: 'bg-blue-400',
+            },
+          }}
+        />
         <ClientOnly>
           <GlobalLoader displaySpinner={false} />
         </ClientOnly>

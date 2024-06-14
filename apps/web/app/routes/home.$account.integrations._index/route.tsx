@@ -70,7 +70,7 @@ export default function TeamIntegrationsPage() {
           }
         >
           {integrations.map((integration) => (
-            <IntegrationCard {...integration} />
+            <IntegrationCard key={integration.title} {...integration} />
           ))}
         </div>
       </ClientOnly>

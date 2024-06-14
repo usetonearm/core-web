@@ -146,7 +146,10 @@ export function PersonalAccountDropdown({
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
-          <Link className={'s-full flex items-center space-x-2'} to={'/home'}>
+          <Link
+            className={'s-full flex cursor-pointer items-center space-x-2'}
+            to={'/home'}
+          >
             <Home className={'h-5'} />
 
             <span>
@@ -159,7 +162,7 @@ export function PersonalAccountDropdown({
 
         <DropdownMenuItem asChild>
           <Link
-            className={'s-full flex items-center space-x-2'}
+            className={'s-full flex cursor-pointer items-center space-x-2'}
             to={paths.settings}
           >
             <Settings className={'h-5'} />
@@ -173,7 +176,7 @@ export function PersonalAccountDropdown({
         <If condition={isSuperAdmin}>
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem asChild>
+          <DropdownMenuItem asChild className={'cursor-pointer'}>
             <Link
               className={'s-full flex items-center space-x-2'}
               to={'/admin'}

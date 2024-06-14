@@ -1,6 +1,8 @@
+import { useState } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from '@remix-run/react';
-import { PlusCircle } from 'lucide-react';
+import { Loader2, PlusCircle } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -36,14 +38,16 @@ type AddStreamProps = {
 };
 
 interface FormValues {
-  name: string;
+  title: string;
   url: string;
 }
 
 export default function AddStreamDialog({
-  account,
   accountId,
+  account,
 }: AddStreamProps) {
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -53,34 +57,47 @@ export default function AddStreamDialog({
   const supabase = useSupabase();
   const navigate = useNavigate();
 
-  const form = useForm({
-    resolver: zodResolver(AddStreamSchema),
-    defaultValues: {
-      name: '',
-      url: '',
-    },
-  });
+  const validateURL = async (url: string): Promise<boolean> => {
+    try {
+      const response = await fetch(url, { method: 'HEAD' });
+      const contentType = response.headers.get('Content-Type');
+      return contentType?.includes('audio/mpeg') ?? false;
+    } catch (error) {
+      console.error('Error validating URL:', error);
+      return false;
+    }
+  };
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const { name, url } = data;
+    setLoading(true);
+    const { title, url } = data;
+
+    const isValidURL = await validateURL(url);
+    if (!isValidURL) {
+      toast.error('The provided URL does not return audio content.');
+      setLoading(false);
+      return;
+    }
 
     try {
       const { data, error } = await supabase
         .from('streams')
-        .insert([{ title: name, url: url, account_id: accountId }])
+        .insert([{ title: title, url: url, account_id: accountId }])
         .select()
         .single();
 
       if (error) {
         console.error('Error inserting data:', error);
-        toast.error('Something went wrong inserting your stream');
       } else {
+        setLoading(false);
+        console.log('Stream added successfully');
         toast.success('Successfully added your stream to be monitored');
-        //@ts-ignore
         navigate(`/home/${account}/streams/${data.id}`);
       }
     } catch (error) {
+      setLoading(false);
       console.error('Unexpected error inserting data:', error);
+      toast.error('Something went wrong when inserting your stream');
     }
   };
 
@@ -100,55 +117,50 @@ export default function AddStreamDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <Form {...form}>
-          <form
-            className={'flex flex-col space-y-4'}
-            // onSubmit={form.handleSubmit((data) => {
-            //   fetcher.submit(data, {
-            //     method: 'POST',
-            //     encType: 'application/json',
-            //   });
-            // })}
-          >
-            <FormField
-              name={'name'}
-              render={({ field }) => {
-                return (
-                  <FormItem>
-                    <FormLabel>label</FormLabel>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="title" className="text-right">
+                Title
+              </Label>
+              <Input
+                id="title"
+                placeholder="House Beats Radio"
+                className="col-span-3"
+                {...register('title', { required: true })}
+              />
+              {errors.title && (
+                <span className="col-span-4 text-red-500">
+                  This field is required
+                </span>
+              )}
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="url" className="text-right">
+                URL
+              </Label>
+              <Input
+                id="url"
+                type="url"
+                placeholder="https://yourstream.com/stream"
+                className="col-span-3"
+                {...register('url', { required: true })}
+              />
+              {errors.url && (
+                <span className="col-span-4 text-red-500">
+                  This field is required
+                </span>
+              )}
+            </div>
+          </div>
 
-                    <FormControl>
-                      <Input maxLength={200} {...field} />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
-            />
-
-            <FormField
-              name={'email'}
-              render={({ field }) => {
-                return (
-                  <FormItem>
-                    <FormLabel>label</FormLabel>
-
-                    <FormControl>
-                      <Input type={'email'} {...field} />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
-            />
-
-            <Button disabled={false} type={'submit'}>
-              Send
+          <DialogFooter>
+            <Button type="submit" disabled={loading}>
+              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Add stream
             </Button>
-          </form>
-        </Form>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

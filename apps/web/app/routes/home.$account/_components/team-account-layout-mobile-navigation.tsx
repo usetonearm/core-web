@@ -125,7 +125,6 @@ function SignOutDropdownItem(
       onClick={props.onSignOut}
     >
       <LogOut className={'h-4'} />
-
       <span>
         <Trans i18nKey={'common:signOut'} />
       </span>

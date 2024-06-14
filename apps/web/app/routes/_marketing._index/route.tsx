@@ -37,7 +37,9 @@ export default function Index() {
             }
           >
             <Pill>
-              <span>The leading internet radio monitoring solution</span>
+              <span>
+                Internet radio monitoring for radio lovers, by radio lovers
+              </span>
             </Pill>
 
             <div className={'flex flex-col items-center space-y-8'}>

@@ -162,6 +162,7 @@ export function AccountSelector({
             <CommandList>
               <CommandGroup>
                 <CommandItem
+                  className="cursor-pointer"
                   onSelect={() => onAccountChange(undefined)}
                   value={PERSONAL_ACCOUNT_SLUG}
                 >
@@ -192,7 +193,7 @@ export function AccountSelector({
                       data-name={account.label}
                       data-slug={account.value}
                       className={cn(
-                        'group my-1 flex justify-between transition-colors',
+                        'group my-1 flex cursor-pointer justify-between transition-colors',
                         {
                           ['bg-muted']: value === account.value,
                         },
