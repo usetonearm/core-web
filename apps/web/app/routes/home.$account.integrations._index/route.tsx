@@ -51,7 +51,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export default function TeamStreamsPage() {
+export default function TeamIntegrationsPage() {
   const data = useLoaderData<typeof loader>();
 
   return (

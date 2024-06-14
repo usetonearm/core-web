@@ -160,7 +160,7 @@ function PricingItem(
       data-cy={'subscription-plan'}
       className={cn(
         props.className,
-        `s-full relative flex flex-1 grow flex-col items-stretch justify-between self-stretch rounded-lg border p-8 lg:w-4/12 xl:max-w-[20rem]`,
+        `s-full relative flex flex-1 grow flex-col items-stretch justify-between self-stretch rounded-lg border p-8 lg:w-4/12 xl:max-w-[24rem]`,
         {
           ['border-primary']: highlighted,
           ['dark:shadow-primary/40 border-transparent shadow dark:shadow-sm']:
@@ -208,9 +208,16 @@ function PricingItem(
 
         <div className={'flex flex-col space-y-1'}>
           <Price>
-            {lineItem
-              ? formatCurrency(props.product.currency, lineItem.cost)
-              : props.plan.label ?? <Trans i18nKey={'billing:custom'} />}
+            <span className="pr-2 line-through">
+              {lineItem
+                ? formatCurrency(props.product.currency, lineItem.cost * 2)
+                : props.plan.label ?? <Trans i18nKey={'billing:custom'} />}
+            </span>
+            <span>
+              {lineItem
+                ? formatCurrency(props.product.currency, lineItem.cost)
+                : props.plan.label ?? <Trans i18nKey={'billing:custom'} />}
+            </span>
           </Price>
 
           <If condition={props.plan.name}>

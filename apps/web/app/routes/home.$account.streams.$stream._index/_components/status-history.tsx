@@ -1,3 +1,4 @@
+import { QuestionMarkIcon } from '@radix-ui/react-icons';
 import { format, formatDistance } from 'date-fns';
 import {
   Check,
@@ -73,7 +74,9 @@ const getStatusIcon = (status: string) => {
     case 'silence':
       return <VolumeX className="h-4 w-4 text-white" aria-hidden="true" />;
     default:
-      return <Ellipsis className="h-4 w-4 text-white" aria-hidden="true" />;
+      return (
+        <QuestionMarkIcon className="h-4 w-4 text-white" aria-hidden="true" />
+      );
   }
 };
 

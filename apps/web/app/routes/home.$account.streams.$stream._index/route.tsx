@@ -1,8 +1,16 @@
-import { lazy, useMemo } from 'react';
+import { lazy, useEffect, useMemo, useState } from 'react';
 
-import { Link, MetaFunction, useLoaderData } from '@remix-run/react';
+import {
+  Link,
+  MetaFunction,
+  useFetcher,
+  useLoaderData,
+} from '@remix-run/react';
 import { useNavigate } from '@remix-run/react';
-import { LoaderFunctionArgs } from '@remix-run/server-runtime';
+import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+} from '@remix-run/server-runtime';
 import { format, formatDistance } from 'date-fns';
 import { BadgeHelp, Cog, Pause, PlusCircle, Send, Trash } from 'lucide-react';
 import { toast } from 'sonner';
@@ -60,6 +68,7 @@ import { EmptyChecksPlaceholder } from './_components/empty-checks-placeholder';
 import { LatestChecks } from './_components/latest-checks';
 import StatusHistory from './_components/status-history';
 import { StreamStatCards } from './_components/stream-stat-cards';
+import { sendTestEmailNotification } from './_lib/server/send-test-notification-email-action.server';
 
 type StatusChange =
   Database['public']['Functions']['get_status_changes_for_stream']['Returns'];
@@ -69,7 +78,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
   const i18n = await createI18nServerInstance(args.request);
 
   // require user
-  await requireUserLoader(args.request);
+  const { email } = await requireUserLoader(args.request);
   const supabase = getSupabaseServerClient(args.request);
 
   const { data: stream, error } = await supabase
@@ -89,6 +98,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
   const title = i18n.t('teams:home.pageTitle');
 
   return {
+    email,
     title,
     account,
     stream,
@@ -137,7 +147,8 @@ function StatusIcon(
 }
 
 export default function StreamPage() {
-  const data = useLoaderData<typeof loader>();
+  const { stream, account, email, title, statusChanges } =
+    useLoaderData<typeof loader>();
   const supabase = useSupabase();
   const navigate = useNavigate();
 
@@ -149,7 +160,7 @@ export default function StreamPage() {
         console.error('Error deleting data:', error);
       } else {
         console.log('Stream deleted successfully');
-        toast('Successfully deleted stream');
+        toast.success('Successfully deleted stream');
         navigate(`/home/${data.account}/streams`);
       }
     } catch (error) {
@@ -157,37 +168,32 @@ export default function StreamPage() {
     }
   };
 
-  console.log(data.stream);
-
   return (
     <>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <Link to={`/home/${data.account}/streams`}>
+            <Link to={`/home/${account}/streams`}>
               <BreadcrumbLink>Streams</BreadcrumbLink>
             </Link>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink>{data.stream.title}</BreadcrumbLink>
+            <BreadcrumbLink>{stream.title}</BreadcrumbLink>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
       <div className="flex items-center gap-3 pt-2">
-        <StatusIcon status={data.stream.status} />
+        <StatusIcon status={stream.status} />
         <TeamAccountLayoutPageHeader
-          account={data.account}
-          title={data.stream.title}
-          description={data.stream.url}
+          account={account}
+          title={stream.title}
+          description={stream.url}
         ></TeamAccountLayoutPageHeader>
       </div>
       <ClientOnly>
         <div className="flex flex-wrap gap-2 text-slate-500">
-          <Button variant="ghost">
-            <Send size="18" className="mr-2" />
-            Send a test alert
-          </Button>
+          <TestAlertButton email={email as string} />
           <Button variant="ghost">
             <Pause size="18" className="mr-2" />
             Pause
@@ -213,19 +219,22 @@ export default function StreamPage() {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={() => deleteStream(data.stream.id)}>
+                <AlertDialogAction
+                  className="bg-destructive"
+                  onClick={() => deleteStream(stream.id)}
+                >
                   Delete
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        {data.stream.checks && data?.stream?.checks.length > 0 ? (
+        {stream.checks && stream?.checks.length > 0 ? (
           <div className="flex-row gap-4">
-            <StreamStatCards stream={data.stream} />
+            <StreamStatCards stream={stream} />
             {/*@ts-ignore*/}
-            <StatusHistory statusChanges={data.statusChanges} />
-            <LatestChecks checks={data.stream.checks} />
+            <StatusHistory statusChanges={statusChanges} />
+            <LatestChecks checks={stream.checks} />
           </div>
         ) : (
           <EmptyChecksPlaceholder />
@@ -242,5 +251,82 @@ export default function StreamPage() {
         </Alert>
       </ClientOnly>
     </>
+  );
+}
+
+export const action = async function ({ request }: ActionFunctionArgs) {
+  const json = await request.json();
+
+  return sendTestEmailNotification(json);
+};
+
+interface TestAlertButtonProps {
+  email: string;
+}
+
+export function TestAlertButton({ email }: TestAlertButtonProps) {
+  const [state, setState] = useState({
+    success: false,
+    error: false,
+  });
+
+  const fetcher = useFetcher<{
+    success: boolean;
+  }>();
+
+  const pending = fetcher.state === 'submitting';
+
+  const data = {
+    email: email,
+  };
+
+  const onSubmit = () => {
+    fetcher.submit(data, {
+      method: 'POST',
+      encType: 'application/json',
+    });
+  };
+
+  useEffect(() => {
+    if (fetcher.data) {
+      const success = fetcher.data.success;
+      setState({ success, error: !success });
+    }
+  }, [fetcher.data]);
+
+  if (state.success) {
+    toast.success('Test notification sent!');
+  }
+
+  if (state.error) {
+    toast.error('Failed to send test notification');
+  }
+
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="ghost" type="submit">
+          <Send size="18" className="mr-2" />
+          Send a test alert
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure you want to send?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Are you sure you want to send a test notification to
+            {/* {email} */}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <form onSubmit={onSubmit}>
+            <AlertDialogAction type="submit" disabled={pending}>
+              Send
+            </AlertDialogAction>
+          </form>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

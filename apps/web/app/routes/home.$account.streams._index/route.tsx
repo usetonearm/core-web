@@ -62,9 +62,11 @@ export default function TeamStreamsPage() {
         title={<Trans i18nKey={'common:streamsTabLabel'} />}
         description={<Trans i18nKey={'common:streamsTabDescription'} />}
       >
-        <AddStreamDialog account={data.accountId as string} />
+        <AddStreamDialog
+          accountId={data.accountId as string}
+          account={data.account}
+        />
       </TeamAccountLayoutPageHeader>
-
       <ClientOnly>
         <StreamsDashboard
           streams={data.streams}

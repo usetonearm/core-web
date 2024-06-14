@@ -5,9 +5,10 @@ import AddStreamDialog from './add-stream';
 
 interface Props {
   accountId: string;
+  account: string;
 }
 
-export function EmptyStreamsPlaceholder({ accountId }: Props) {
+export function EmptyStreamsPlaceholder({ accountId, account }: Props) {
   return (
     <div className="flex flex-col items-center justify-center space-y-8 py-24">
       <div className="flex flex-col items-center space-y-1">
@@ -23,7 +24,7 @@ export function EmptyStreamsPlaceholder({ accountId }: Props) {
         </Heading>
       </div>
 
-      <AddStreamDialog account={accountId} />
+      <AddStreamDialog account={account} accountId={accountId} />
     </div>
   );
 }

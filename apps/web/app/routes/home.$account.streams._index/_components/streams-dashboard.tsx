@@ -62,7 +62,7 @@ export default function StreamsDashboard({
           </div>
         </div>
       ) : (
-        <EmptyStreamsPlaceholder accountId={accountId} />
+        <EmptyStreamsPlaceholder accountId={accountId} account={account} />
       )}
     </div>
   );

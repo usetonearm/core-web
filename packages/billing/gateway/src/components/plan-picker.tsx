@@ -323,6 +323,12 @@ export function PlanPicker(
                             >
                               <div>
                                 <Price key={plan.id}>
+                                  <span className="pr-2 line-through">
+                                    {formatCurrency(
+                                      product.currency.toLowerCase(),
+                                      primaryLineItem.cost * 2,
+                                    )}
+                                  </span>
                                   <span>
                                     {formatCurrency(
                                       product.currency.toLowerCase(),
