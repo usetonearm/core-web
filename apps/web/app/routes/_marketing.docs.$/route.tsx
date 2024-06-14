@@ -21,7 +21,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
   return [
     {
-      title,
+      title: title + ' · Tonearm',
       description,
     },
   ];

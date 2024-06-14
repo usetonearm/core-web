@@ -18,7 +18,7 @@ import { requireUserLoader } from '~/lib/require-user-loader';
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
     },
   ];
 };

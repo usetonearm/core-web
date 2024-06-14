@@ -47,7 +47,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
     },
   ];
 };

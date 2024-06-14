@@ -34,7 +34,7 @@ import { loadTeamAccountBillingPage } from './_lib/load-team-account-billing-pag
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
     },
   ];
 };

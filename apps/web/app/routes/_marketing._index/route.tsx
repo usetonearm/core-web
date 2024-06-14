@@ -20,6 +20,14 @@ import { cn } from '@kit/ui/utils';
 import billingConfig from '~/config/billing.config';
 import pathsConfig from '~/config/paths.config';
 
+export const meta: MetaFunction = () => {
+  return [
+    {
+      title: 'Tonearm',
+    },
+  ];
+};
+
 export default function Index() {
   return (
     <div className={'mt-4 flex flex-col space-y-24 py-16'}>
@@ -37,7 +45,7 @@ export default function Index() {
             }
           >
             <Pill>
-              <span>Stream monitoring for radio lovers, by radio lovers</span>
+              <span>Internet radio monitoring for music lovers</span>
             </Pill>
 
             <div className={'flex flex-col items-center space-y-8'}>

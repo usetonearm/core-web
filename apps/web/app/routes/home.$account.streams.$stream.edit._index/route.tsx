@@ -64,7 +64,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
   if (!stream) return;
 
   const account = args.params.account as string;
-  const title = i18n.t('teams:home.pageTitle');
+  const title = 'Edit: ' + stream.title;
 
   return {
     title,
@@ -76,7 +76,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
     },
   ];
 };

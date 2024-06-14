@@ -1,3 +1,5 @@
+import { Link } from '@remix-run/react';
+
 export function SiteBanner() {
   return (
     <div className="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
@@ -38,12 +40,12 @@ export function SiteBanner() {
           To celebrate the launch of <b>tonearm</b> we're offering 50% off all
           plans
         </p>
-        <a
-          href="#"
+        <Link
+          to="/auth/sign-up?next=%2Fhome&plan=pro-monthly&redirectToCheckout=true"
           className="hidden flex-none rounded-full bg-gray-900 px-3.5 py-1 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 md:flex"
         >
           Start your free trial <span aria-hidden="true">&rarr;</span>
-        </a>
+        </Link>
       </div>
       <div className="flex flex-1 justify-end"></div>
     </div>

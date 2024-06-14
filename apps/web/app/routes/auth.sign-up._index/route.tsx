@@ -33,7 +33,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
     },
   ];
 };
@@ -47,7 +47,8 @@ export default function SignUpPage() {
   const { inviteToken } = useLoaderData<typeof loader>();
 
   const signInPath =
-      pathsConfig.auth.signIn + (inviteToken ? `?invite_token=${inviteToken}` : '');
+    pathsConfig.auth.signIn +
+    (inviteToken ? `?invite_token=${inviteToken}` : '');
 
   return (
     <>

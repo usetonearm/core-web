@@ -12,7 +12,7 @@ export default function AuthLayout() {
         attribute="class"
         enableSystem
         disableTransitionOnChange
-        defaultTheme="dark"
+        defaultTheme="light"
         enableColorScheme={false}
       >
         <Outlet />

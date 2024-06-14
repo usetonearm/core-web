@@ -32,6 +32,14 @@ import pathsConfig from '~/config/paths.config';
 
 import { SitePageHeader } from '../_marketing/_components/site-page-header';
 
+export const meta = () => {
+  return [
+    {
+      title: 'About · Tonearm',
+    },
+  ];
+};
+
 export default function AboutPage() {
   const { t } = useTranslation();
 
@@ -93,33 +101,42 @@ export default function AboutPage() {
         <img
           src="/images/about/oscar.jpg"
           className="rounded-lg object-cover"
+          alt="Oscar at the studio"
         />
-        <img src="/images/about/jake-studio.jpg" className="rounded-lg" />
-        <img src="/images/about/oscar-and-isaac.jpg" className="rounded-lg" />
+        <img
+          src="/images/about/jake-studio.jpg"
+          className="rounded-lg"
+          alt="Jake behind the decks"
+        />
+        <img
+          src="/images/about/oscar-and-isaac.jpg"
+          className="rounded-lg"
+          alt="Nomad Radio's co-founders"
+        />
         <img
           src="/images/about/77.jpeg"
           className="rounded-lg object-cover"
-          alt=""
+          alt="Our launch party at 77"
         />
         <img
           src="/images/about/eddy-avenue.jpeg"
           className="rounded-lg object-cover"
-          alt=""
+          alt="The eddy avenue studio"
         />
         <img
           src="/images/about/isaac-bike.jpeg"
           className="rounded-lg object-cover"
-          alt=""
+          alt="Isaac getting around the studio"
         />
         <img
           src="/images/about/marrickville-penthouse.jpeg"
           className="rounded-lg object-cover"
-          alt=""
+          alt="The marrickville penthouse"
         />
         <img
           src="/images/about/marrickville.jpeg"
           className="rounded-lg object-cover"
-          alt=""
+          alt="Our marrickville studio"
         />
       </div>
 

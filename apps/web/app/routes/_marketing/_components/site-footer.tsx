@@ -28,7 +28,7 @@ export function SiteFooter() {
                   </p>
                 </div>
 
-                <div className={'text-muted-foreground flex text-xs'}>
+                {/* <div className={'text-muted-foreground flex text-xs'}>
                   <p>
                     <Trans
                       i18nKey={'marketing:copyright'}
@@ -38,7 +38,17 @@ export function SiteFooter() {
                       }}
                     />
                   </p>
-                </div>
+                </div> */}
+              </div>
+              <div className="text-xs text-gray-400">
+                Built by{' '}
+                <a
+                  href="https://x.com/oscargws_"
+                  target="_blank"
+                  className="rounded-lg border border-gray-200 p-1"
+                >
+                  @oscargws_
+                </a>
               </div>
             </div>
           </div>

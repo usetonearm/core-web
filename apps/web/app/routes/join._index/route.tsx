@@ -24,7 +24,7 @@ import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
     },
   ];
 };

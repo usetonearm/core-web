@@ -21,6 +21,14 @@ export async function loader({ request }: LoaderFunctionArgs) {
   });
 }
 
+export const meta: MetaFunction = () => {
+  return [
+    {
+      title: 'Tonearm',
+    },
+  ];
+};
+
 export default function MarketingLayout() {
   const data = useLoaderData<typeof loader>();
 

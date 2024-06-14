@@ -16,7 +16,7 @@ import { sendContactEmailAction } from './_lib/server/send-contact-email-action.
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
       description: data?.subtitle,
     },
   ];

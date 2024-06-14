@@ -20,14 +20,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   }
 
   return {
-    title: i18n.t('auth:passwordResetLabel'),
+    title: i18n.t('auth:passwordResetLabel') + ' · Tonearm',
   };
 };
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
     },
   ];
 };

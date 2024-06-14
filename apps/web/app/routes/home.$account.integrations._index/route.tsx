@@ -30,7 +30,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
     .select('*');
 
   const account = args.params.account as string;
-  const title = i18n.t('teams:home.pageTitle');
+  const title = 'Integrations';
 
   const api = createTeamAccountsApi(supabase);
   const workspace = await api.getAccountWorkspace(account);
@@ -46,7 +46,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
     },
   ];
 };

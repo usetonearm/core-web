@@ -7,7 +7,7 @@ import { SitePageHeader } from '~/routes/_marketing/_components/site-page-header
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      title: data?.title,
+      title: data?.title + ' · Tonearm',
     },
   ];
 };
@@ -16,7 +16,7 @@ export const loader = async function ({ request }: LoaderFunctionArgs) {
   const { t } = await createI18nServerInstance(request);
 
   return {
-    title: t('marketing:privacyPolicy'),
+    title: t('marketing:privacyPolicy') + ' · Tonearm',
     subtitle: t('marketing:privacyPolicyDescription'),
   };
 };

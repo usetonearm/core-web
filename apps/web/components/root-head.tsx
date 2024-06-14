@@ -5,7 +5,7 @@ const name = appConfig.name;
 
 export function RootHead() {
   const structuredData = {
-    name: name,
+    // name: name,
     url: siteUrl,
     image: `${siteUrl}/images/banner.png`,
     logo: `${siteUrl}/favicon/android-chrome-512x512.png`,
@@ -15,7 +15,6 @@ export function RootHead() {
 
   return (
     <>
-      <title>{name}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta property="og:image" content={structuredData.image} />
