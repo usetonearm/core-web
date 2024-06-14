@@ -10,7 +10,11 @@ function LogoImage({
   width?: number;
 }) {
   return (
-    <img src="/images/bh-logo.png" className={className} width={width}></img>
+    <img
+      src="/images/logo-transparent.png"
+      className={className}
+      width={width}
+    ></img>
   );
 }
 

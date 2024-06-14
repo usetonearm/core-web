@@ -1,3 +1,4 @@
+import { MetaFunction } from '@remix-run/node';
 import { Outlet, json, useLoaderData } from '@remix-run/react';
 import type { LoaderFunctionArgs } from '@remix-run/server-runtime';
 import { ThemeProvider } from 'next-themes';
@@ -40,3 +41,10 @@ export default function MarketingLayout() {
     </ThemeProvider>
   );
 }
+
+export const meta: MetaFunction = () => [
+  {
+    title: 'Tonearm111',
+    image: '/images/banner.png',
+  },
+];

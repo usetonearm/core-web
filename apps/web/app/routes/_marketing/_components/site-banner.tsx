@@ -27,7 +27,7 @@ export function SiteBanner() {
       </div>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <p className="text-sm leading-6 text-gray-900">
-          <strong className="font-semibold">EOFY Sale!</strong>
+          <strong className="font-semibold">Launch sale!</strong>
           <svg
             viewBox="0 0 2 2"
             className="mx-2 inline h-0.5 w-0.5 fill-current"
@@ -35,7 +35,8 @@ export function SiteBanner() {
           >
             <circle cx={1} cy={1} r={1} />
           </svg>
-          To celebrate the EOFY we're giving 50% off until the end of June!
+          To celebrate the launch of <b>tonearm</b> we're offering 50% off all
+          plans
         </p>
         <a
           href="#"

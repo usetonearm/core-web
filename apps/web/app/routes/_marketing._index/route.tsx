@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react';
+import { Link, MetaFunction } from '@remix-run/react';
 import {
   Bell,
   ChevronRight,
@@ -445,3 +445,10 @@ function IconContainer(
     </div>
   );
 }
+
+export const meta: MetaFunction = () => [
+  {
+    title: 'Tonearm111',
+    image: '/images/banner.png',
+  },
+];

@@ -7,7 +7,8 @@ export function RootHead() {
   const structuredData = {
     name: name,
     url: siteUrl,
-    logo: `${siteUrl}/favicon/favicon-150x150.png`,
+    image: `${siteUrl}/images/banner.png`,
+    logo: `${siteUrl}/favicon/android-chrome-512x512.png`,
     '@context': 'https://schema.org',
     '@type': 'Organization',
   };
@@ -17,7 +18,7 @@ export function RootHead() {
       <title>{name}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+      <meta property="og:image" content={structuredData.image} />
       <link
         rel="apple-touch-icon"
         sizes="144x144"
