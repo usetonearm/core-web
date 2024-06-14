@@ -25,6 +25,10 @@ const links = {
     label: 'marketing:pricing',
     path: '/pricing',
   },
+  About: {
+    label: 'marketing:about',
+    path: '/about',
+  },
   FAQ: {
     label: 'marketing:faq',
     path: '/faq',

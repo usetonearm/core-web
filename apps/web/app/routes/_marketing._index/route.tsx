@@ -37,9 +37,7 @@ export default function Index() {
             }
           >
             <Pill>
-              <span>
-                Internet radio monitoring for radio lovers, by radio lovers
-              </span>
+              <span>Stream monitoring for radio lovers, by radio lovers</span>
             </Pill>
 
             <div className={'flex flex-col items-center space-y-8'}>
@@ -445,10 +443,3 @@ function IconContainer(
     </div>
   );
 }
-
-export const meta: MetaFunction = () => [
-  {
-    title: 'Tonearm111',
-    image: '/images/banner.png',
-  },
-];

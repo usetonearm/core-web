@@ -41,10 +41,3 @@ export default function MarketingLayout() {
     </ThemeProvider>
   );
 }
-
-export const meta: MetaFunction = () => [
-  {
-    title: 'Tonearm111',
-    image: '/images/banner.png',
-  },
-];

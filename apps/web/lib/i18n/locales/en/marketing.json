@@ -1,6 +1,8 @@
 {
   "blog": "Blog",
   "blogSubtitle": "News and updates about the platform",
+  "about": "About",
+  "aboutSubtitle": "The story behind tonearm",
   "documentation": "Documentation",
   "documentationSubtitle": "Tutorials and guide to get started with the platform",
   "faq": "FAQ",
@@ -14,7 +16,6 @@
   "readMore": "Read more",
   "contactFaq": "If you have any questions, please contact us",
   "contact": "Contact",
-  "about": "About",
   "product": "Product",
   "useCase": "Use cases",
   "forRadioCo": "Monitoring Radio.co",
@@ -39,7 +40,7 @@
   "contactError": "An error occurred while sending your message",
   "contactSuccessDescription": "We have received your message and will get back to you as soon as possible",
   "contactErrorDescription": "An error occurred while sending your message. Please try again later",
-  "footerDescription": "Internet radio monitoring for radio lovers, by radio lovers",
+  "footerDescription": "Stream monitoring for radio lovers, by radio lovers",
   "statusPage": "Status",
   "copyright": "© Copyright {{year}} {{product}}. All Rights Reserved."
 }
