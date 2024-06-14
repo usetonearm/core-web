@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useFetcher } from '@remix-run/react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { useCsrfToken } from '@kit/csrf/client';
@@ -80,6 +81,7 @@ function CreateTeamAccountForm(props: { onClose: () => void }) {
     if (fetcher.data) {
       if (fetcher.data.success) {
         props.onClose();
+        toast.success('Welcome to your new team!');
       }
     }
   }, [fetcher.data, props]);

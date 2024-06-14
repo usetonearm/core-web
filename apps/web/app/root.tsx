@@ -53,7 +53,7 @@ export default function App() {
       <head>
         <script
           defer
-          data-domain="broadcasthound.com"
+          data-domain="usetonearm.com"
           src="https://plausible.io/js/script.js"
         />
         <RootHead />

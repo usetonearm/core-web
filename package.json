@@ -1,13 +1,13 @@
 {
-  "name": "broadcasthound-mono",
+  "name": "usetonearm-mono",
   "private": true,
   "sideEffects": false,
   "engines": {
     "node": ">=v18.17.1"
   },
   "author": {
-    "url": "https://broadcasthound.com",
-    "name": "Broadcast Hound"
+    "url": "https://usetonearm.com",
+    "name": "Tonearm"
   },
   "scripts": {
     "build": "turbo build --cache-dir=.turbo",

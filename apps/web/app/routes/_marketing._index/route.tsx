@@ -128,7 +128,7 @@ export default function Index() {
           {/* <div className="text-primary max-sm max-w-lg flex-col gap-2 rounded-lg bg-green-50 p-4 shadow-md">
             <Quote />
             <div>
-              Broadcast Hound was pivotal in running Nomad Radio. We had
+              Tonearm was pivotal in running Nomad Radio. We had
               residents coming in and out of our studio and needed a way to
               ensure there was no dead air as shows changed hosts.
             </div>
@@ -159,9 +159,9 @@ export default function Index() {
                 </svg>
                 <blockquote>
                   <p className="text-2xl font-medium text-gray-900 dark:text-white">
-                    Broadcast Hound was pivotal in running Nomad Radio. We had
-                    residents coming in and out of our studio and needed a way
-                    to ensure there was no dead air as shows changed hosts.
+                    Tonearm was pivotal in running Nomad Radio. We had residents
+                    coming in and out of our studio and needed a way to ensure
+                    there was no dead air as shows changed hosts.
                   </p>
                 </blockquote>
                 <figcaption className="mt-6 flex items-center justify-center space-x-3">

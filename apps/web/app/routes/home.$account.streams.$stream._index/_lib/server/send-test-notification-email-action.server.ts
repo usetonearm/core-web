@@ -16,7 +16,7 @@ export const sendTestEmailNotification = async (
 
   await mailer.sendEmail({
     to: data.email,
-    from: 'notifications@broadcasthound.com',
+    from: 'notifications@usetonearm.com',
     subject: '[Alert] Your stream is down!',
     html: `
         <p>

@@ -113,7 +113,7 @@ export function SiteFooter() {
                     </Link>
                   </FooterLink> */}
                   <FooterLink>
-                    <Link to={'https://broadcasthound.betteruptime.com/'}>
+                    <Link to={'https://usetonearm.betteruptime.com/'}>
                       <Trans i18nKey={'marketing:statusPage'} />
                     </Link>
                   </FooterLink>

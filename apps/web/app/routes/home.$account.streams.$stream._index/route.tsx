@@ -209,8 +209,7 @@ export default function StreamPage() {
           <div className="ml-2">
             <AlertTitle className="text-md">Need a hand?</AlertTitle>
             <AlertDescription className="text-sm text-gray-600">
-              Need some support? Reach out to our team at
-              support@broadcasthound.com
+              Need some support? Reach out to our team at support@usetonearm.com
             </AlertDescription>
           </div>
         </Alert>
