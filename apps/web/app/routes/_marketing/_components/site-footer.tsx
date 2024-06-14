@@ -45,7 +45,7 @@ export function SiteFooter() {
                 <a
                   href="https://x.com/oscargws_"
                   target="_blank"
-                  className="rounded-lg border border-gray-200 p-1"
+                  className="rounded-lg border border-gray-200 p-1 hover:bg-gray-100 hover:text-gray-500"
                 >
                   @oscargws_
                 </a>

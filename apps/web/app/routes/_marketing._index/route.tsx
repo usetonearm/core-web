@@ -104,7 +104,7 @@ export default function Index() {
           />
         </div>
       </div>
-
+      {/* 
       <div className={'container mx-auto'}>
         <div
           className={
@@ -131,12 +131,12 @@ export default function Index() {
               </Heading>
             </div>
           </div>
-          {/* <div className="text-primary max-sm max-w-lg flex-col gap-2 rounded-lg bg-green-50 p-4 shadow-md">
+          <div className="text-primary max-sm max-w-lg flex-col gap-2 rounded-lg bg-green-50 p-4 shadow-md">
             <Quote />
             <div>
-              Tonearm was pivotal in running Nomad Radio. We had
-              residents coming in and out of our studio and needed a way to
-              ensure there was no dead air as shows changed hosts.
+              Tonearm was pivotal in running Nomad Radio. We had residents
+              coming in and out of our studio and needed a way to ensure there
+              was no dead air as shows changed hosts.
             </div>
             <div className="flex items-center gap-3 text-sm">
               <img
@@ -148,7 +148,7 @@ export default function Index() {
                 <div>Operations Director at Nomad Radio</div>
               </div>
             </div>
-          </div> */}
+          </div>
           <section className="bg-white dark:bg-gray-900">
             <div className="mx-auto max-w-screen-xl px-4 py-8 text-center lg:px-6 lg:py-16">
               <figure className="mx-auto max-w-screen-md">
@@ -178,7 +178,7 @@ export default function Index() {
                   />
                   <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                     <div className="pr-3 font-medium text-gray-900 dark:text-white">
-                      {/* Isaac Scott */}
+                      Isaac Scott
                     </div>
                     <div className="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">
                       Operations Director at Nomad Radio
@@ -189,7 +189,7 @@ export default function Index() {
             </div>
           </section>
         </div>
-      </div>
+      </div> */}
 
       <div className={'container mx-auto'}>
         <div
@@ -236,10 +236,11 @@ export default function Index() {
           <FeatureShowcaseContainer>
             <FeatureContainer reverse>
               <img
-                src={'/images/notifications.png'}
+                className="self-center"
+                src={'/images/features/integrations.png'}
                 width={'300'}
                 height={'auto'}
-                alt={'Dashboard'}
+                alt={'Integrations'}
               />
             </FeatureContainer>
 
