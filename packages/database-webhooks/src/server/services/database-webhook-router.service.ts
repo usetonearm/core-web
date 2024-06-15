@@ -93,7 +93,7 @@ class DatabaseWebhookRouterService {
 
   private async handleStreamsWebhook(body: RecordChange<'streams'>) {
     if (body.type === 'UPDATE' && body.old_record) {
-      const service = createStreamsWebhooksService();
+      const service = createStreamsWebhooksService(this.adminClient);
 
       return service.handleStreamStatusChange(body.record, body.old_record);
     }

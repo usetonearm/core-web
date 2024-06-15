@@ -1,3 +1,5 @@
+import { SupabaseClient } from '@supabase/supabase-js';
+
 import process from 'node:process';
 import { z } from 'zod';
 
@@ -6,11 +8,13 @@ import { Database } from '@kit/supabase/database';
 
 type Stream = Database['public']['Tables']['streams']['Row'];
 
-export function createStreamsWebhooksService() {
-  return new StreamsWebhooksService();
+export function createStreamsWebhooksService(client: SupabaseClient<Database>) {
+  return new StreamsWebhooksService(client);
 }
 
 class StreamsWebhooksService {
+  constructor(private readonly client: SupabaseClient<Database>) {}
+
   private readonly namespace = 'streams.webhooks';
 
   async handleStreamStatusChange(currentStream: Stream, oldStream: Stream) {
@@ -65,10 +69,25 @@ class StreamsWebhooksService {
     const { getMailer } = await import('@kit/mailers');
     const { getStreamDownEmailHtml } = await import('@kit/email-templates');
 
+    const { data: account, error: accountError } = await this.client
+      .from('accounts')
+      .select('*')
+      .eq('id', stream.account_id)
+      .single();
+
+    const { data: contact, error: contactError } = await this.client
+      .from('stream_alert_contact')
+      .select('*')
+      .eq('stream', stream.id)
+      .single();
+
+    if (!contact) return;
+    if (!account) return;
+
     const mailer = await getMailer();
     const html = getStreamDownEmailHtml(
-      'dog',
-      'dog',
+      account.name,
+      account.slug as string,
       stream.id,
       stream.title,
       stream.last_check as unknown as Date,
@@ -77,7 +96,7 @@ class StreamsWebhooksService {
     const emailSettings = this.getEmailSettings();
 
     await mailer.sendEmail({
-      to: 'oscar@watsonsmith.com.au',
+      to: contact.email as string,
       from: emailSettings.fromEmail,
       subject: 'Your stream is down!',
       html: html,

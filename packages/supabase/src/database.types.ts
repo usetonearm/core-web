@@ -235,6 +235,7 @@ export type Database = {
           id: string
           status: Database["public"]["Enums"]["check_status"]
           stream: string
+          volume: number | null
         }
         Insert: {
           account_id: string
@@ -243,6 +244,7 @@ export type Database = {
           id?: string
           status?: Database["public"]["Enums"]["check_status"]
           stream: string
+          volume?: number | null
         }
         Update: {
           account_id?: string
@@ -251,6 +253,7 @@ export type Database = {
           id?: string
           status?: Database["public"]["Enums"]["check_status"]
           stream?: string
+          volume?: number | null
         }
         Relationships: [
           {
@@ -581,6 +584,35 @@ export type Database = {
         }
         Relationships: []
       }
+      stream_alert_contact: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          stream: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          stream?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          stream?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_stream_alert_contact_stream_fkey"
+            columns: ["stream"]
+            isOneToOne: false
+            referencedRelation: "streams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       streams: {
         Row: {
           account_id: string
@@ -589,6 +621,7 @@ export type Database = {
           last_check: string | null
           last_online: string | null
           last_outage: string | null
+          paused: boolean | null
           status: Database["public"]["Enums"]["check_status"]
           title: string
           updated_at: string
@@ -601,6 +634,7 @@ export type Database = {
           last_check?: string | null
           last_online?: string | null
           last_outage?: string | null
+          paused?: boolean | null
           status?: Database["public"]["Enums"]["check_status"]
           title: string
           updated_at?: string
@@ -613,6 +647,7 @@ export type Database = {
           last_check?: string | null
           last_online?: string | null
           last_outage?: string | null
+          paused?: boolean | null
           status?: Database["public"]["Enums"]["check_status"]
           title?: string
           updated_at?: string
