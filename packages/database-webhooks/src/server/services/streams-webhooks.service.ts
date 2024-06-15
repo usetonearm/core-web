@@ -60,7 +60,7 @@ class StreamsWebhooksService {
 
     const emailSettings = this.getEmailSettings();
 
-    mailer.sendEmail({
+    await mailer.sendEmail({
       to: 'oscar@watsonsmith.com.au',
       from: emailSettings.fromEmail,
       subject: 'Your stream is up!',
@@ -74,7 +74,7 @@ class StreamsWebhooksService {
 
     const emailSettings = this.getEmailSettings();
 
-    mailer.sendEmail({
+    await mailer.sendEmail({
       to: 'oscar@watsonsmith.com.au',
       from: emailSettings.fromEmail,
       subject: 'Your stream is down!',
