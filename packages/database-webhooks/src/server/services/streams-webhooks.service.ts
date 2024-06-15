@@ -79,11 +79,18 @@ class StreamsWebhooksService {
     const { getMailer } = await import('@kit/mailers');
     const { getStreamDownEmailHtml } = await import('@kit/email-templates');
 
+    logger.info(
+      ctx,
+      'Successfully imported kit/mailer and kit/email-templates',
+    );
+
     const { data: account, error: accountError } = await this.client
       .from('accounts')
       .select('*')
       .eq('id', stream.account_id)
       .single();
+
+    logger.info(ctx, 'Called to accounts');
 
     if (accountError) logger.error(ctx, accountError.message);
     logger.info({ context: ctx, account: account });
@@ -93,6 +100,8 @@ class StreamsWebhooksService {
       .select('*')
       .eq('stream', stream.id)
       .single();
+
+    logger.info(ctx, 'Called to contact');
 
     if (contactError) logger.error(ctx, contactError.message);
     logger.info({ context: ctx, contact: contact });
