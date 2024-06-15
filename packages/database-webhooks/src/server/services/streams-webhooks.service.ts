@@ -5,7 +5,6 @@ import { getLogger } from '@kit/shared/logger';
 import { Database } from '@kit/supabase/database';
 
 type Stream = Database['public']['Tables']['streams']['Row'];
-type Status = Database['public']['Enums']['check_status'];
 
 export function createStreamsWebhooksService() {
   return new StreamsWebhooksService();
@@ -46,12 +45,6 @@ class StreamsWebhooksService {
     } else {
       logger.info(ctx, 'Stream status unchanged');
     }
-
-    // if (account.is_personal_account) {
-    //   logger.info(ctx, `Account is personal. We send an email to the user.`);
-
-    //   await this.sendDeleteAccountEmail(account);
-    // }
   }
 
   private async sendStreamIsUpEmail(stream: Stream) {
@@ -70,7 +63,16 @@ class StreamsWebhooksService {
 
   private async sendStreamIsDownEmail(stream: Stream) {
     const { getMailer } = await import('@kit/mailers');
+    const { getStreamDownEmailHtml } = await import('@kit/email-templates');
+
     const mailer = await getMailer();
+    const html = getStreamDownEmailHtml(
+      'dog',
+      'dog',
+      stream.id,
+      stream.title,
+      stream.last_check as unknown as Date,
+    );
 
     const emailSettings = this.getEmailSettings();
 
@@ -78,32 +80,9 @@ class StreamsWebhooksService {
       to: 'oscar@watsonsmith.com.au',
       from: emailSettings.fromEmail,
       subject: 'Your stream is down!',
-      html: `<p>Your stream ${stream.title} is down!</p>`,
+      html: html,
     });
   }
-
-  //   private async sendAccountDeletionEmail(params: {
-  //     fromEmail: string;
-  //     userEmail: string;
-  //     userDisplayName: string;
-  //     productName: string;
-  //   }) {
-  //     const { renderAccountDeleteEmail } = await import('@kit/email-templates');
-  //     const { getMailer } = await import('@kit/mailers');
-  //     const mailer = await getMailer();
-
-  //     const { html, subject } = await renderAccountDeleteEmail({
-  //       userDisplayName: params.userDisplayName,
-  //       productName: params.productName,
-  //     });
-
-  //     return mailer.sendEmail({
-  //       to: params.userEmail,
-  //       from: params.fromEmail,
-  //       subject,
-  //       html,
-  //     });
-  //   }
 
   private getEmailSettings() {
     const productName = import.meta.env.VITE_PRODUCT_NAME;
