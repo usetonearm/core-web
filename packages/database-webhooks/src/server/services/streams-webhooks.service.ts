@@ -66,6 +66,16 @@ class StreamsWebhooksService {
   }
 
   private async sendStreamIsDownEmail(stream: Stream) {
+    const logger = await getLogger();
+
+    const ctx = {
+      streamId: stream.id,
+      status: stream.status,
+      namespace: this.namespace,
+    };
+
+    logger.info(ctx, 'Sending stream is down email');
+
     const { getMailer } = await import('@kit/mailers');
     const { getStreamDownEmailHtml } = await import('@kit/email-templates');
 
@@ -75,13 +85,21 @@ class StreamsWebhooksService {
       .eq('id', stream.account_id)
       .single();
 
+    if (accountError) logger.error(ctx, accountError.message);
+
     const { data: contact, error: contactError } = await this.client
       .from('stream_alert_contact')
       .select('*')
       .eq('stream', stream.id)
       .single();
 
-    if (!contact) return;
+    if (contactError) logger.error(ctx, contactError.message);
+
+    if (!contact) {
+      logger.warn(ctx, 'No contacts found for stream');
+      return;
+    }
+
     if (!account) return;
 
     const mailer = await getMailer();
@@ -98,7 +116,7 @@ class StreamsWebhooksService {
     await mailer.sendEmail({
       to: contact.email as string,
       from: emailSettings.fromEmail,
-      subject: 'Your stream is down!',
+      subject: '[Alert] Your stream is down!',
       html: html,
     });
   }
