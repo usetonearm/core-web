@@ -86,6 +86,7 @@ class StreamsWebhooksService {
       .single();
 
     if (accountError) logger.error(ctx, accountError.message);
+    logger.info({ context: ctx, account: account });
 
     const { data: contact, error: contactError } = await this.client
       .from('stream_alert_contact')
@@ -94,13 +95,17 @@ class StreamsWebhooksService {
       .single();
 
     if (contactError) logger.error(ctx, contactError.message);
+    logger.info({ context: ctx, contact: contact });
 
     if (!contact) {
       logger.warn(ctx, 'No contacts found for stream');
       return;
     }
 
-    if (!account) return;
+    if (!account) {
+      logger.warn(ctx, 'No account find');
+      return;
+    }
 
     const mailer = await getMailer();
     const html = getStreamDownEmailHtml(
@@ -110,6 +115,8 @@ class StreamsWebhooksService {
       stream.title,
       stream.last_check as unknown as Date,
     );
+
+    logger.info(ctx, 'html: ' + html);
 
     const emailSettings = this.getEmailSettings();
 
