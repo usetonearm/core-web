@@ -31,11 +31,11 @@ class StreamsWebhooksService {
       switch (currentStream.status) {
         case 'online':
           logger.info(ctx, 'Status has changed to online');
-          this.sendStreamIsUpEmail(currentStream);
+          await this.sendStreamIsUpEmail(currentStream);
           break;
         case 'down':
           logger.info(ctx, 'Status has changed to down');
-          this.sendStreamIsDownEmail(currentStream);
+          await this.sendStreamIsDownEmail(currentStream);
           break;
         case 'silence':
           logger.info(ctx, 'Status has changed to silence');
