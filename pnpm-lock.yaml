@@ -508,9 +508,15 @@ importers:
       '@kit/billing-gateway':
         specifier: workspace:^
         version: link:../billing/gateway
+      '@kit/email-templates':
+        specifier: workspace:^
+        version: link:../email-templates
       '@kit/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
+      '@kit/mailers':
+        specifier: workspace:^
+        version: link:../mailers
       '@kit/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier

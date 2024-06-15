@@ -3,6 +3,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { Database } from '@kit/supabase/database';
 
 import { RecordChange, Tables } from '../record-change.type';
+import { createStreamsWebhooksService } from './streams-webhooks.service';
 
 export function createDatabaseWebhookRouterService(
   adminClient: SupabaseClient<Database>,
@@ -40,6 +41,12 @@ class DatabaseWebhookRouterService {
         const payload = body as RecordChange<typeof body.table>;
 
         return this.handleAccountsWebhook(payload);
+      }
+
+      case 'streams': {
+        const payload = body as RecordChange<typeof body.table>;
+
+        return this.handleStreamsWebhook(payload);
       }
 
       default: {
@@ -81,6 +88,14 @@ class DatabaseWebhookRouterService {
       const service = createAccountWebhooksService();
 
       return service.handleAccountDeletedWebhook(body.old_record);
+    }
+  }
+
+  private async handleStreamsWebhook(body: RecordChange<'streams'>) {
+    if (body.type === 'UPDATE' && body.old_record) {
+      const service = createStreamsWebhooksService();
+
+      return service.handleStreamStatusChange(body.record, body.old_record);
     }
   }
 }
