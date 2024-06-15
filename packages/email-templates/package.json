@@ -6,7 +6,7 @@
     "clean": "git clean -xdf .turbo node_modules",
     "format": "prettier --check \"**/*.{ts,tsx}\"",
     "lint": "eslint .",
-    "email:dev": "email dev",
+    "email:dev": "email dev --dir src/emails",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@kit/prettier-config",

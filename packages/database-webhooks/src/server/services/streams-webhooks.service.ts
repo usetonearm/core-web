@@ -31,7 +31,7 @@ class StreamsWebhooksService {
       switch (currentStream.status) {
         case 'online':
           logger.info(ctx, 'Status has changed to online');
-          await this.sendStreamIsUpEmail(currentStream);
+          await this.sendStreamIsOnlineEmail(currentStream);
           break;
         case 'down':
           logger.info(ctx, 'Status has changed to down');
@@ -39,9 +39,10 @@ class StreamsWebhooksService {
           break;
         case 'silence':
           logger.info(ctx, 'Status has changed to silence');
+          await this.sendStreamIsSilentEmail(currentStream);
           break;
         case 'error':
-          logger.info(ctx, 'Status has changed to error');
+          logger.warn(ctx, 'Status has changed to error');
           break;
         default:
           break;
@@ -51,17 +52,121 @@ class StreamsWebhooksService {
     }
   }
 
-  private async sendStreamIsUpEmail(stream: Stream) {
+  private async sendStreamIsSilentEmail(stream: Stream) {
+    const logger = await getLogger();
+
+    const ctx = {
+      streamId: stream.id,
+      status: stream.status,
+      namespace: this.namespace,
+    };
+
+    logger.info(ctx, 'Sending stream is silent email');
+
     const { getMailer } = await import('@kit/mailers');
+    const { getStreamDownEmailHtml } = await import('@kit/email-templates');
+
+    const { data: account, error: accountError } = await this.client
+      .from('accounts')
+      .select('*')
+      .eq('id', stream.account_id)
+      .single();
+
+    if (accountError) logger.error(ctx, accountError.message);
+
+    const { data: contact, error: contactError } = await this.client
+      .from('stream_alert_contact')
+      .select('*')
+      .eq('stream', stream.id)
+      .single();
+
+    if (contactError) logger.error(ctx, contactError.message);
+
+    if (!contact) {
+      logger.warn(ctx, 'No contacts found for stream. Exiting');
+      return;
+    }
+
+    if (!account) {
+      logger.warn(ctx, 'No account found. Exiting');
+      return;
+    }
+
     const mailer = await getMailer();
+    const html = getStreamDownEmailHtml(
+      account.name,
+      account.slug as string,
+      stream.id,
+      stream.title,
+      stream.last_check as unknown as Date,
+    );
 
     const emailSettings = this.getEmailSettings();
 
     await mailer.sendEmail({
-      to: 'oscar@watsonsmith.com.au',
+      to: contact.email as string,
       from: emailSettings.fromEmail,
-      subject: 'Your stream is up!',
-      html: `<p>Your stream ${stream.title} is up!</p>`,
+      subject: '[Alert] Your stream is silent!',
+      html: html,
+    });
+  }
+
+  private async sendStreamIsOnlineEmail(stream: Stream) {
+    const logger = await getLogger();
+
+    const ctx = {
+      streamId: stream.id,
+      status: stream.status,
+      namespace: this.namespace,
+    };
+
+    logger.info(ctx, 'Sending stream is back online email');
+
+    const { getMailer } = await import('@kit/mailers');
+    const { getStreamOnlineEmailHtml } = await import('@kit/email-templates');
+
+    const { data: account, error: accountError } = await this.client
+      .from('accounts')
+      .select('*')
+      .eq('id', stream.account_id)
+      .single();
+
+    if (accountError) logger.error(ctx, accountError.message);
+
+    const { data: contact, error: contactError } = await this.client
+      .from('stream_alert_contact')
+      .select('*')
+      .eq('stream', stream.id)
+      .single();
+
+    if (contactError) logger.error(ctx, contactError.message);
+
+    if (!contact) {
+      logger.warn(ctx, 'No contacts found for stream. Exiting');
+      return;
+    }
+
+    if (!account) {
+      logger.warn(ctx, 'No account found. Exiting');
+      return;
+    }
+
+    const mailer = await getMailer();
+    const html = getStreamOnlineEmailHtml(
+      account.name,
+      account.slug as string,
+      stream.id,
+      stream.title,
+      stream.last_check as unknown as Date,
+    );
+
+    const emailSettings = this.getEmailSettings();
+
+    await mailer.sendEmail({
+      to: contact.email as string,
+      from: emailSettings.fromEmail,
+      subject: 'Your stream is back online',
+      html: html,
     });
   }
 
@@ -79,21 +184,13 @@ class StreamsWebhooksService {
     const { getMailer } = await import('@kit/mailers');
     const { getStreamDownEmailHtml } = await import('@kit/email-templates');
 
-    logger.info(
-      ctx,
-      'Successfully imported kit/mailer and kit/email-templates',
-    );
-
     const { data: account, error: accountError } = await this.client
       .from('accounts')
       .select('*')
       .eq('id', stream.account_id)
       .single();
 
-    logger.info(ctx, 'Called to accounts');
-
     if (accountError) logger.error(ctx, accountError.message);
-    logger.info({ context: ctx, account: account });
 
     const { data: contact, error: contactError } = await this.client
       .from('stream_alert_contact')
@@ -101,18 +198,15 @@ class StreamsWebhooksService {
       .eq('stream', stream.id)
       .single();
 
-    logger.info(ctx, 'Called to contact');
-
     if (contactError) logger.error(ctx, contactError.message);
-    logger.info({ context: ctx, contact: contact });
 
     if (!contact) {
-      logger.warn(ctx, 'No contacts found for stream');
+      logger.warn(ctx, 'No contacts found for stream. Exiting');
       return;
     }
 
     if (!account) {
-      logger.warn(ctx, 'No account find');
+      logger.warn(ctx, 'No account found. Exiting');
       return;
     }
 
@@ -124,8 +218,6 @@ class StreamsWebhooksService {
       stream.title,
       stream.last_check as unknown as Date,
     );
-
-    logger.info(ctx, 'html: ' + html);
 
     const emailSettings = this.getEmailSettings();
 
