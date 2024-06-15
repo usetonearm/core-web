@@ -64,7 +64,7 @@ class StreamsWebhooksService {
     logger.info(ctx, 'Sending stream is silent email');
 
     const { getMailer } = await import('@kit/mailers');
-    const { getStreamDownEmailHtml } = await import('@kit/email-templates');
+    const { getStreamSilentEmailHtml } = await import('@kit/email-templates');
 
     const { data: account, error: accountError } = await this.client
       .from('accounts')
