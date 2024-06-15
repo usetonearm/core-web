@@ -28,9 +28,11 @@ class StreamsWebhooksService {
       switch (currentStream.status) {
         case 'online':
           logger.info(ctx, 'Status has changed to online');
+          this.sendStreamIsUpEmail(currentStream);
           break;
         case 'down':
           logger.info(ctx, 'Status has changed to down');
+          this.sendStreamIsDownEmail(currentStream);
           break;
         case 'silence':
           logger.info(ctx, 'Status has changed to silence');
@@ -52,42 +54,56 @@ class StreamsWebhooksService {
     // }
   }
 
-  private async sendDeleteAccountEmail(account: Stream) {
-    // const userEmail = account.email;
-    // const userDisplayName = account.name ?? userEmail;
-    // const emailSettings = this.getEmailSettings();
-    // if (userEmail) {
-    //   await this.sendAccountDeletionEmail({
-    //     fromEmail: emailSettings.fromEmail,
-    //     productName: emailSettings.productName,
-    //     userDisplayName,
-    //     userEmail,
-    //   });
-    // }
-  }
-
-  private async sendAccountDeletionEmail(params: {
-    fromEmail: string;
-    userEmail: string;
-    userDisplayName: string;
-    productName: string;
-  }) {
-    const { renderAccountDeleteEmail } = await import('@kit/email-templates');
+  private async sendStreamIsUpEmail(stream: Stream) {
     const { getMailer } = await import('@kit/mailers');
     const mailer = await getMailer();
 
-    const { html, subject } = await renderAccountDeleteEmail({
-      userDisplayName: params.userDisplayName,
-      productName: params.productName,
-    });
+    const emailSettings = this.getEmailSettings();
 
-    return mailer.sendEmail({
-      to: params.userEmail,
-      from: params.fromEmail,
-      subject,
-      html,
+    mailer.sendEmail({
+      to: 'oscar@watsonsmith.com.au',
+      from: emailSettings.fromEmail,
+      subject: 'Your stream is up!',
+      html: `<p>Your stream ${stream.title} is up!</p>`,
     });
   }
+
+  private async sendStreamIsDownEmail(stream: Stream) {
+    const { getMailer } = await import('@kit/mailers');
+    const mailer = await getMailer();
+
+    const emailSettings = this.getEmailSettings();
+
+    mailer.sendEmail({
+      to: 'oscar@watsonsmith.com.au',
+      from: emailSettings.fromEmail,
+      subject: 'Your stream is down!',
+      html: `<p>Your stream ${stream.title} is down!</p>`,
+    });
+  }
+
+  //   private async sendAccountDeletionEmail(params: {
+  //     fromEmail: string;
+  //     userEmail: string;
+  //     userDisplayName: string;
+  //     productName: string;
+  //   }) {
+  //     const { renderAccountDeleteEmail } = await import('@kit/email-templates');
+  //     const { getMailer } = await import('@kit/mailers');
+  //     const mailer = await getMailer();
+
+  //     const { html, subject } = await renderAccountDeleteEmail({
+  //       userDisplayName: params.userDisplayName,
+  //       productName: params.productName,
+  //     });
+
+  //     return mailer.sendEmail({
+  //       to: params.userEmail,
+  //       from: params.fromEmail,
+  //       subject,
+  //       html,
+  //     });
+  //   }
 
   private getEmailSettings() {
     const productName = import.meta.env.VITE_PRODUCT_NAME;
