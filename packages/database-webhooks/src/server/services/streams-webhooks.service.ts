@@ -93,7 +93,7 @@ class StreamsWebhooksService {
     }
 
     const mailer = await getMailer();
-    const html = getStreamDownEmailHtml(
+    const html = getStreamSilentEmailHtml(
       account.name,
       account.slug as string,
       stream.id,
