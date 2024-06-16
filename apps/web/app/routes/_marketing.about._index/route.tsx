@@ -100,42 +100,42 @@ export default function AboutPage() {
         </div>
         <img
           src="/images/about/oscar.jpg"
-          className="rounded-lg object-cover"
+          className="min-h-60 rounded-lg object-cover"
           alt="Oscar at the studio"
         />
         <img
           src="/images/about/jake-studio.jpg"
-          className="rounded-lg"
+          className="min-h-60 rounded-lg"
           alt="Jake behind the decks"
         />
         <img
           src="/images/about/oscar-and-isaac.jpg"
-          className="rounded-lg"
+          className="min-h-60 rounded-lg"
           alt="Nomad Radio's co-founders"
         />
         <img
           src="/images/about/77.jpeg"
-          className="rounded-lg object-cover"
+          className="min-h-60 rounded-lg object-cover"
           alt="Our launch party at 77"
         />
         <img
           src="/images/about/eddy-avenue.jpeg"
-          className="rounded-lg object-cover"
+          className="min-h-60 rounded-lg object-cover"
           alt="The eddy avenue studio"
         />
         <img
           src="/images/about/isaac-bike.jpeg"
-          className="rounded-lg object-cover"
+          className="min-h-60 rounded-lg object-cover"
           alt="Isaac getting around the studio"
         />
         <img
           src="/images/about/marrickville-penthouse.jpeg"
-          className="rounded-lg object-cover"
+          className="min-h-60 rounded-lg object-cover"
           alt="The marrickville penthouse"
         />
         <img
           src="/images/about/marrickville.jpeg"
-          className="rounded-lg object-cover"
+          className="min-h-60 rounded-lg object-cover"
           alt="Our marrickville studio"
         />
       </div>

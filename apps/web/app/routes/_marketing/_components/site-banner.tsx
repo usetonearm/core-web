@@ -29,7 +29,7 @@ export function SiteBanner() {
       </div>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-center">
         <p className="text-sm leading-6 text-gray-900">
-          <strong className="font-semibold">Launch sale!</strong>
+          <strong className="font-semibold">We've launched!</strong>
           <svg
             viewBox="0 0 2 2"
             className="mx-2 inline h-0.5 w-0.5 fill-current"
@@ -37,8 +37,7 @@ export function SiteBanner() {
           >
             <circle cx={1} cy={1} r={1} />
           </svg>
-          To celebrate the launch of <b>tonearm</b> we're offering 50% off all
-          plans
+          We're pleased to share tonearm with you and your team!
         </p>
         <Link
           to="/auth/sign-up?next=%2Fhome&plan=pro-monthly&redirectToCheckout=true"
