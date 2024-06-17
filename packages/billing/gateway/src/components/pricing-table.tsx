@@ -208,11 +208,6 @@ function PricingItem(
 
         <div className={'flex flex-col space-y-1'}>
           <Price>
-            <span className="pr-2 line-through">
-              {lineItem
-                ? formatCurrency(props.product.currency, lineItem.cost * 2)
-                : props.plan.label ?? <Trans i18nKey={'billing:custom'} />}
-            </span>
             <span>
               {lineItem
                 ? formatCurrency(props.product.currency, lineItem.cost)

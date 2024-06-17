@@ -1,3 +1,4 @@
+import { MetaFunction } from '@remix-run/node';
 import { Outlet, json, useLoaderData } from '@remix-run/react';
 import { LoaderFunctionArgs } from '@remix-run/server-runtime';
 import { ThemeProvider } from 'next-themes';

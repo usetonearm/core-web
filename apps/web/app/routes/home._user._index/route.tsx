@@ -1,3 +1,4 @@
+import { MetaFunction } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { LoaderFunctionArgs } from '@remix-run/server-runtime';
 
@@ -11,6 +12,14 @@ import { requireUserLoader } from '~/lib/require-user-loader';
 
 import { HomeAccountsList } from '../home._user/_components/home-accounts-list';
 import { loadUserWorkspace } from '../home._user/_lib/load-user-workspace.server';
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  return [
+    {
+      title: 'Home · Tonearm',
+    },
+  ];
+};
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await requireUserLoader(request);
