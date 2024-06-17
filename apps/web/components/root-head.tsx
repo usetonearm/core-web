@@ -5,7 +5,6 @@ const name = appConfig.name;
 
 export function RootHead() {
   const structuredData = {
-    // name: name,
     url: siteUrl,
     image: `${siteUrl}/images/banner.png`,
     logo: `${siteUrl}/favicon/android-chrome-512x512.png`,
@@ -54,20 +53,6 @@ export function RootHead() {
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
 
       <meta name="theme-color" content={appConfig.themeColor} />
-
-      <meta
-        name="description"
-        content={appConfig.description}
-        key="meta:description"
-      />
-
-      <meta property="og:title" key="og:title" content={name} />
-
-      <meta
-        property="og:description"
-        key="og:description"
-        content={appConfig.description}
-      />
 
       <meta property="og:site_name" content={name} />
       <meta property="twitter:title" content={name} />
