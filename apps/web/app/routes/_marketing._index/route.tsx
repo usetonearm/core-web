@@ -17,6 +17,7 @@ import { Heading } from '@kit/ui/heading';
 import { Trans } from '@kit/ui/trans';
 import { cn } from '@kit/ui/utils';
 
+import ShimmerButton from '~/components/ui/shimmer-button';
 import billingConfig from '~/config/billing.config';
 import pathsConfig from '~/config/paths.config';
 
@@ -44,9 +45,9 @@ export default function Index() {
               'flex w-full flex-1 flex-col items-center space-y-8 xl:space-y-12 2xl:space-y-14'
             }
           >
-            <Pill>
+            {/* <Pill>
               <span>Internet radio monitoring for music lovers</span>
-            </Pill>
+            </Pill> */}
 
             <div className={'flex flex-col items-center space-y-8'}>
               <HeroTitle>
@@ -57,28 +58,14 @@ export default function Index() {
                 <Heading
                   level={2}
                   className={
-                    'text-muted-foreground p-0 text-center font-sans text-2xl font-normal'
+                    'text-muted-foreground max-w-md p-0 text-center font-sans text-2xl font-normal'
                   }
                 >
-                  <span>Ensure the best experience for all of</span>
-                </Heading>
-
-                <Heading
-                  level={2}
-                  className={
-                    'text-muted-foreground p-0 text-center font-sans text-2xl font-normal'
-                  }
-                >
-                  <span>your listeners. Detect silence and</span>
-                </Heading>
-
-                <Heading
-                  level={2}
-                  className={
-                    'text-muted-foreground p-0 text-center font-sans text-2xl font-normal'
-                  }
-                >
-                  outages in realtime.
+                  <span>
+                    Best-in-class internet radio monitoring and silence
+                    detection. Keep your streams online, and your listeners
+                    locked-in.
+                  </span>
                 </Heading>
               </div>
 
@@ -86,7 +73,6 @@ export default function Index() {
             </div>
           </div>
         </div>
-
         <div
           className={
             'animate-in fade-in mx-auto flex max-w-6xl justify-center py-12' +
@@ -99,217 +85,11 @@ export default function Index() {
             }
             width={1689}
             height={1057}
-            src={`/images/dashboard-demo.webp`}
+            src={'/images/features/showcase.png'}
             alt={`App`}
           />
         </div>
       </div>
-      {/* 
-      <div className={'container mx-auto'}>
-        <div
-          className={
-            'flex flex-col items-center justify-center space-y-8 py-8 xl:space-y-16 xl:py-16'
-          }
-        >
-          <div
-            className={
-              'flex max-w-3xl flex-col items-center space-y-8 text-center'
-            }
-          >
-            <Pill>
-              <span>A modern, scalable, and secure SaaS Starter Kit</span>
-            </Pill>
-
-            <div className={'flex flex-col space-y-2'}>
-              <Heading level={1}>The best tool in the space</Heading>
-
-              <Heading
-                level={2}
-                className={'text-muted-foreground font-sans font-normal'}
-              >
-                Trusted by radio station operators around the world
-              </Heading>
-            </div>
-          </div>
-          <div className="text-primary max-sm max-w-lg flex-col gap-2 rounded-lg bg-green-50 p-4 shadow-md">
-            <Quote />
-            <div>
-              Tonearm was pivotal in running Nomad Radio. We had residents
-              coming in and out of our studio and needed a way to ensure there
-              was no dead air as shows changed hosts.
-            </div>
-            <div className="flex items-center gap-3 text-sm">
-              <img
-                className="h-12 w-12 rounded-full"
-                src="https://media.licdn.com/dms/image/D5603AQERKhAF1LaBZQ/profile-displayphoto-shrink_200_200/0/1667265040428?e=2147483647&v=beta&t=p8u7RuiinqbR2Zaha3t0ew-mM1jsth0Smm1T9NvskbU"
-              />
-              <div className="flex-column">
-                <div className="font-semibold">Isaac Scott</div>
-                <div>Operations Director at Nomad Radio</div>
-              </div>
-            </div>
-          </div>
-          <section className="bg-white dark:bg-gray-900">
-            <div className="mx-auto max-w-screen-xl px-4 py-8 text-center lg:px-6 lg:py-16">
-              <figure className="mx-auto max-w-screen-md">
-                <svg
-                  className="mx-auto mb-3 h-12 text-gray-400 dark:text-gray-600"
-                  viewBox="0 0 24 27"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <blockquote>
-                  <p className="text-2xl font-medium text-gray-900 dark:text-white">
-                    Tonearm was pivotal in running Nomad Radio. We had residents
-                    coming in and out of our studio and needed a way to ensure
-                    there was no dead air as shows changed hosts.
-                  </p>
-                </blockquote>
-                <figcaption className="mt-6 flex items-center justify-center space-x-3">
-                  <img
-                    className="h-6 w-6 rounded-full"
-                    // src="https://media.licdn.com/dms/image/D5603AQERKhAF1LaBZQ/profile-displayphoto-shrink_200_200/0/1667265040428?e=2147483647&v=beta&t=p8u7RuiinqbR2Zaha3t0ew-mM1jsth0Smm1T9NvskbU"
-                    alt="profile picture"
-                  />
-                  <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
-                    <div className="pr-3 font-medium text-gray-900 dark:text-white">
-                      Isaac Scott
-                    </div>
-                    <div className="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">
-                      Operations Director at Nomad Radio
-                    </div>
-                  </div>
-                </figcaption>
-              </figure>
-            </div>
-          </section>
-        </div>
-      </div> */}
-
-      <div className={'container mx-auto'}>
-        <div
-          className={'flex flex-col space-y-16 xl:space-y-32 2xl:space-y-36'}
-        >
-          <FeatureShowcaseContainer>
-            <FeatureContainer>
-              <div className={'flex flex-col space-y-6'}>
-                <IconContainer className={'bg-green-50 dark:bg-green-500/10'}>
-                  <Radio className={'h-5 text-green-500'} />
-                </IconContainer>
-
-                <div className={'flex flex-col'}>
-                  <Heading level={2}>Enterprise ready monitoring</Heading>
-
-                  <Heading
-                    level={3}
-                    className={'text-muted-foreground font-sans font-normal'}
-                  >
-                    Highly robust monitoring for your station
-                  </Heading>
-                </div>
-              </div>
-
-              <div>
-                Monitor unlimited streams for downtime and detect silence
-                instantly. Ensure your streams are always online and your
-                listeners never miss a beat with our automated monitoring
-                solution.
-              </div>
-            </FeatureContainer>
-
-            <FeatureContainer>
-              <img
-                className="rounded-2xl"
-                src={'/images/sign-in.webp'}
-                width={'1760'}
-                height={'1680'}
-                alt={'Sign In'}
-              />
-            </FeatureContainer>
-          </FeatureShowcaseContainer>
-
-          <FeatureShowcaseContainer>
-            <FeatureContainer reverse>
-              <img
-                className="self-center"
-                src={'/images/features/integrations.png'}
-                width={'300'}
-                height={'auto'}
-                alt={'Integrations'}
-              />
-            </FeatureContainer>
-
-            <FeatureContainer>
-              <div className={'flex flex-col space-y-6'}>
-                <IconContainer className={'bg-indigo-50 dark:bg-indigo-500/10'}>
-                  <Bell className={'h-5 text-indigo-500'} />
-                </IconContainer>
-
-                <div className={'flex flex-col'}>
-                  <Heading level={2}>Alerts & Notifications</Heading>
-
-                  <Heading
-                    level={3}
-                    className={'text-muted-foreground font-sans font-normal'}
-                  >
-                    Integrate into your existing notification platform
-                  </Heading>
-                </div>
-              </div>
-
-              <div>
-                Stay informed with real-time notifications. Receive push alerts
-                via email, text, Slack, or Discord whenever there's an issue
-                with your streams. Never miss an important update about your
-                stream's status.
-              </div>
-            </FeatureContainer>
-          </FeatureShowcaseContainer>
-
-          <FeatureShowcaseContainer>
-            <FeatureContainer>
-              <div className={'flex flex-col space-y-6'}>
-                <IconContainer className={'bg-blue-50 dark:bg-blue-500/10'}>
-                  <Grid2x2Check className={'h-5 text-blue-500'} />
-                </IconContainer>
-
-                <div className={'flex flex-col'}>
-                  <Heading level={2}>Ready to use</Heading>
-
-                  <Heading
-                    level={3}
-                    className={'text-muted-foreground font-sans font-normal'}
-                  >
-                    Built in support for the biggest radio platforms
-                  </Heading>
-                </div>
-              </div>
-
-              <div>
-                Out-of-the-box compatibility with popular platforms like
-                Radio.co, Airtime.pro, Libretime, and Radio Cult. Integrate
-                seamlessly and start monitoring your streams right away.
-              </div>
-            </FeatureContainer>
-
-            <FeatureContainer>
-              <img
-                className="rounded-2xl"
-                src={'/images/billing.webp'}
-                width={'1916'}
-                height={'1392'}
-                alt={'Billing'}
-              />
-            </FeatureContainer>
-          </FeatureShowcaseContainer>
-        </div>
-      </div>
-
       <div className={'container mx-auto'}>
         <div
           className={
@@ -408,28 +188,9 @@ function FeatureContainer(
 function MainCallToActionButton() {
   return (
     <div className={'flex space-x-2'}>
-      {/* <Button asChild variant={'link'}>
-        <Link to={'/docs'}>
-          <Trans i18nKey={'common:documentation'} />
-        </Link>
-      </Button> */}
-
-      <Button asChild>
-        <Link to={'/auth/sign-up'}>
-          <span className={'flex items-center space-x-0.5'}>
-            <span>
-              <Trans i18nKey={'common:getStartedForFree'} />
-            </span>
-
-            <ChevronRight
-              className={
-                'animate-in fade-in slide-in-from-left-8 h-4' +
-                'delay-800 zoom-in fill-mode-both duration-1000'
-              }
-            />
-          </span>
-        </Link>
-      </Button>
+      <Link to={'/auth/sign-up'}>
+        <ShimmerButton>Sign up for free</ShimmerButton>
+      </Link>
     </div>
   );
 }
