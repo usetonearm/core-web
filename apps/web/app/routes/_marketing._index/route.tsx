@@ -21,6 +21,8 @@ import ShimmerButton from '~/components/ui/shimmer-button';
 import billingConfig from '~/config/billing.config';
 import pathsConfig from '~/config/paths.config';
 
+import { FeatureGrid } from './_components/feature-grid';
+
 export const meta: MetaFunction = () => {
   return [
     {
@@ -73,6 +75,7 @@ export default function Index() {
             </div>
           </div>
         </div>
+
         <div
           className={
             'animate-in fade-in mx-auto flex max-w-6xl justify-center py-12' +
@@ -90,6 +93,9 @@ export default function Index() {
           />
         </div>
       </div>
+
+      <FeatureGrid />
+
       <div className={'container mx-auto'}>
         <div
           className={

@@ -12,33 +12,32 @@ interface Item {
 
 let notifications = [
   {
-    name: 'Payment received',
-    description: 'Magic UI',
+    name: 'Your stream is down',
+    description: 'Nomad Radio is unresponsive',
     time: '15m ago',
-
-    icon: '💸',
+    color: '#FF3D71',
+    icon: '❌',
+  },
+  {
+    name: 'Your stream has recovered',
+    description: 'Nomad Radio is back online',
+    time: '10m ago',
+    icon: '✅',
     color: '#00C9A7',
   },
   {
-    name: 'User signed up',
-    description: 'Magic UI',
-    time: '10m ago',
-    icon: '👤',
+    name: 'Your stream is silent',
+    description: 'Nomad Radio is broadcasting silence',
+    time: '5m ago',
+    icon: '🔇',
     color: '#FFB800',
   },
   {
-    name: 'New message',
-    description: 'Magic UI',
-    time: '5m ago',
-    icon: '💬',
-    color: '#FF3D71',
-  },
-  {
-    name: 'New event',
-    description: 'Magic UI',
+    name: 'Your stream has recovered',
+    description: 'Nomad Radio is back online',
     time: '2m ago',
-    icon: '🗞️',
-    color: '#1E86FF',
+    icon: '✅️',
+    color: '#00C9A7',
   },
 ];
 
@@ -59,7 +58,7 @@ const Notification = ({ name, description, icon, color, time }: Item) => {
     >
       <div className="flex flex-row items-center gap-3">
         <div
-          className="flex h-10 w-10 items-center justify-center rounded-2xl"
+          className="flex h-10 min-h-10 w-10 min-w-10 items-center justify-center rounded-2xl"
           style={{
             backgroundColor: color,
           }}
