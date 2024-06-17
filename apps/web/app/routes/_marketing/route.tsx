@@ -24,7 +24,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export const meta: MetaFunction = () => {
   return [
     {
-      title: 'Tonearm',
+      title: 'Tonearm · Internet radio silence & downtime monitoring',
     },
   ];
 };

@@ -8,6 +8,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
       title: data?.title + ' · Tonearm',
+      description: data?.subtitle,
     },
   ];
 };

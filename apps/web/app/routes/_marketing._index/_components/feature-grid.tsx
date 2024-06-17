@@ -34,6 +34,7 @@ const features = [
         width="400"
         height="400"
         className="scale-110 object-cover object-top transition-all duration-300 ease-out hover:scale-125"
+        alt="Calendar feature"
       />
     ),
     className: 'lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2',

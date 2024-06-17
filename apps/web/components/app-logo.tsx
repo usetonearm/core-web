@@ -14,6 +14,7 @@ function LogoImage({
       src="/images/logo-transparent.png"
       className={className}
       width={width}
+      alt="Tonearm logo"
     ></img>
   );
 }

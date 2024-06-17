@@ -26,7 +26,7 @@ import { FeatureGrid } from './_components/feature-grid';
 export const meta: MetaFunction = () => {
   return [
     {
-      title: 'Tonearm',
+      title: 'Tonearm · Internet radio silence & downtime monitoring',
     },
   ];
 };

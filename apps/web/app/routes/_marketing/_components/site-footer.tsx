@@ -96,11 +96,11 @@ export function SiteFooter() {
                 </FooterSectionHeading>
 
                 <FooterSectionList>
-                  <FooterLink>
+                  {/* <FooterLink>
                     <Link to={'/blog'}>
                       <Trans i18nKey={'marketing:blog'} />
                     </Link>
-                  </FooterLink>
+                  </FooterLink> */}
                   <FooterLink>
                     <Link to={'/contact'}>
                       <Trans i18nKey={'marketing:contact'} />
