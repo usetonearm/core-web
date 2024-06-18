@@ -122,7 +122,8 @@ export function EditStreamForm({
       <form onSubmit={handleSubmit(onSubmit)}>
         <Card className="mt-4">
           <CardHeader>
-            <CardTitle>Settings</CardTitle>
+            <CardTitle>Details</CardTitle>
+            <CardDescription>Where is your stream hosted?</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-6">
