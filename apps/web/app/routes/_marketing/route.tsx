@@ -25,6 +25,8 @@ export const meta: MetaFunction = () => {
   return [
     {
       title: 'Tonearm · Internet radio silence & downtime monitoring',
+      description:
+        'Best in class internet radio silence & downtime monitoring. Built by radio operators, for radio operators. Realtime silence detection and outage alerts',
     },
   ];
 };
