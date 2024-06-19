@@ -40,7 +40,10 @@ import {
 import AddStreamDialog from './add-stream';
 import { EmptyStreamsPlaceholder } from './empty-streams-placeholder';
 
-type Stream = Database['public']['Tables']['streams']['Row'];
+type Stream = Pick<
+  Database['public']['Tables']['streams']['Row'],
+  'status' | 'title' | 'url' | 'id'
+>;
 
 type StreamsDashboardProps = {
   streams: Stream[] | null;
@@ -101,9 +104,11 @@ function StreamListItem(stream: Stream, account: string) {
                 <span className={`${color} font-medium`}>
                   {stream.status.charAt(0).toUpperCase() +
                     stream.status.slice(1)}
-                  {' · '}
+                  {/* {' · '} */}
                 </span>
-                <span className="text-gray-400">{'23h'}</span>
+                {/* 
+                TODO: Add in real time
+                <span className="text-gray-400">{'23h'}</span> */}
               </div>
               <div className="text-sm text-gray-400">
                 <span>{stream.url}</span>

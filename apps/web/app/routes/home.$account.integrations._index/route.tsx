@@ -19,15 +19,8 @@ import { requireUserLoader } from '~/lib/require-user-loader';
 import { TeamAccountLayoutPageHeader } from '~/routes/home.$account/_components/team-account-layout-page-header';
 
 export const loader = async (args: LoaderFunctionArgs) => {
-  const i18n = await createI18nServerInstance(args.request);
-
-  // require user
   await requireUserLoader(args.request);
   const supabase = getSupabaseServerClient(args.request);
-
-  const { data: streamsData, error } = await supabase
-    .from('streams')
-    .select('*');
 
   const account = args.params.account as string;
   const title = 'Integrations';
@@ -39,7 +32,6 @@ export const loader = async (args: LoaderFunctionArgs) => {
     title,
     account,
     accountId: workspace.data?.account.id,
-    streams: streamsData,
   };
 };
 

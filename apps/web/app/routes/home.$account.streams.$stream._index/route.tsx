@@ -85,6 +85,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
   const { data: stream, error } = await supabase
     .from('streams')
     .select('*, checks(*)')
+    .limit(25, { referencedTable: 'checks' })
     .eq('id', args.params.stream as string)
     .single();
 

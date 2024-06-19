@@ -28,7 +28,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
 
   const { data: streamsData, error } = await supabase
     .from('streams')
-    .select('*');
+    .select('id, title, status, url');
 
   const account = args.params.account as string;
   const title = i18n.t('teams:home.pageTitle');
