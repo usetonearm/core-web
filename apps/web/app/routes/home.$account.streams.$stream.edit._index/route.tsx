@@ -16,6 +16,7 @@ import { format, formatDistance } from 'date-fns';
 import { BadgeHelp, Cog, Pause, PlusCircle, Send, Trash } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { z } from 'zod';
 
 import { verifyCsrfToken } from '@kit/csrf/server';
 import { useSupabase } from '@kit/supabase/hooks/use-supabase';
@@ -44,9 +45,12 @@ import { Label } from '@kit/ui/label';
 
 import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
 import { requireUserLoader } from '~/lib/require-user-loader';
+import { updateContactsAction } from '~/lib/streams/streams-actions-service';
 
 import { StreamHeader } from '../home.$account.streams.$stream._index/_components/stream-header';
+import { AddContactsForm } from './_components/add-contacts-form';
 import { EditStreamForm } from './_components/edit-stream-form';
+import { UpdateContactsSchema } from './_lib/add-contacts-schema';
 import { EditStreamSchema } from './_lib/edit-stream-schema';
 
 export const loader = async (args: LoaderFunctionArgs) => {
@@ -57,9 +61,13 @@ export const loader = async (args: LoaderFunctionArgs) => {
 
   const { data: stream, error } = await supabase
     .from('streams')
-    .select('*')
+    .select('*, stream_alert_contact(*)')
     .eq('id', args.params.stream as string)
     .single();
+
+  const { data: contacts, error: contactErrors } = await supabase
+    .from('stream_alert_contact')
+    .select('*');
 
   if (!stream) return;
 
@@ -67,6 +75,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
   const title = 'Edit: ' + stream.title;
 
   return {
+    contacts,
     title,
     account,
     stream,
@@ -81,70 +90,8 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-interface FormValues {
-  title: string;
-  url: string;
-}
-
 export default function StreamEditPage() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
-
-  const { stream, account } = useLoaderData<typeof loader>();
-
-  const supabase = useSupabase();
-
-  const form = useForm({
-    resolver: zodResolver(EditStreamSchema),
-    defaultValues: {
-      title: '',
-      url: '',
-    },
-  });
-
-  const validateURL = async (url: string): Promise<boolean> => {
-    try {
-      const response = await fetch(url, { method: 'HEAD' });
-      const contentType = response.headers.get('Content-Type');
-      return contentType?.includes('audio/mpeg') ?? false;
-    } catch (error) {
-      console.error('Error validating URL:', error);
-      return false;
-    }
-  };
-
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
-
-  // const onSubmit: SubmitHandler<FormValues> = async (data) => {
-  //   console.log(data);
-  //   const { title, url } = data;
-
-  //   const isValidURL = await validateURL(url);
-  //   if (!isValidURL) {
-  //     toast.error('The provided URL does not return audio content.');
-  //     return;
-  //   }
-
-  // try {
-  //   const { data, error } = await supabase
-  //     .from('streams')
-  //     .update([{ title: title, url: url }])
-  //     .eq('id', stream.id);
-
-  //   if (error) {
-  //     console.error('Error updating data:', error);
-  //   } else {
-  //     console.log('Stream updated successfully');
-  //     toast.success('Successfully updated your stream');
-  //   }
-  // } catch (error) {
-  //   console.error('Unexpected error updating data:', error);
-  //   toast.error('Something went wrong when updating your stream');
-  // }
-  // };
+  const { stream, account, contacts } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -172,7 +119,26 @@ export default function StreamEditPage() {
       <StreamHeader account={account} stream={stream} />
       <ClientOnly>
         <EditStreamForm account={account} stream={stream} />
+        <AddContactsForm
+          //@ts-ignore
+          existingContacts={contacts}
+          streamId={stream.id}
+        />
       </ClientOnly>
     </>
   );
 }
+
+export const action = async function (args: ActionFunctionArgs) {
+  const client = getSupabaseServerClient(args.request);
+  const json = await args.request.json();
+  const data = await UpdateContactsSchema.parseAsync(json);
+
+  await verifyCsrfToken(args.request, data.payload.csrfToken);
+
+  switch (data.intent) {
+    case 'update-contacts': {
+      return updateContactsAction({ client, data });
+    }
+  }
+};

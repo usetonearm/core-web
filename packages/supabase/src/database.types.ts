@@ -589,19 +589,19 @@ export type Database = {
           created_at: string
           email: string
           id: string
-          stream: string | null
+          stream: string
         }
         Insert: {
           created_at?: string
           email: string
           id?: string
-          stream?: string | null
+          stream: string
         }
         Update: {
           created_at?: string
           email?: string
           id?: string
-          stream?: string | null
+          stream?: string
         }
         Relationships: [
           {
