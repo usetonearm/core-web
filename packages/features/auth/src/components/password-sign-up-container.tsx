@@ -42,8 +42,6 @@ export function EmailPasswordSignUpContainer({
           captchaToken,
         });
 
-        setShowVerifyEmailAlert(true);
-
         if (onSignUp) {
           onSignUp(data.user?.id);
         }

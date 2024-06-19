@@ -31,7 +31,7 @@ export const createTeamAccountAction = async (params: {
     throw new Error('Error creating team account');
   }
 
-  const accountHomePath = '/home/' + data.slug;
+  const accountHomePath = '/home/' + data.slug + '/streams';
 
   return redirectDocument(accountHomePath);
 };

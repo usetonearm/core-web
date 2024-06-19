@@ -2,6 +2,9 @@
 
 import type { Provider } from '@supabase/supabase-js';
 
+import { Navigate, redirect, useNavigate } from '@remix-run/react';
+import { toast } from 'sonner';
+
 import { isBrowser } from '@kit/shared/utils';
 import { Alert, AlertDescription, AlertTitle } from '@kit/ui/alert';
 import { If } from '@kit/ui/if';
@@ -27,6 +30,12 @@ export function SignUpMethodsContainer(props: {
   inviteToken?: string;
 }) {
   const redirectUrl = getCallbackUrl(props);
+  const navigate = useNavigate();
+
+  const onSignUp = (userId?: string) => {
+    toast.success('Success! Taking you to your account now');
+    navigate('/home');
+  };
 
   return (
     <>
@@ -35,7 +44,10 @@ export function SignUpMethodsContainer(props: {
       </If>
 
       <If condition={props.providers.password}>
-        <EmailPasswordSignUpContainer emailRedirectTo={redirectUrl} />
+        <EmailPasswordSignUpContainer
+          emailRedirectTo={redirectUrl}
+          onSignUp={onSignUp}
+        />
       </If>
 
       <If condition={props.providers.magicLink}>

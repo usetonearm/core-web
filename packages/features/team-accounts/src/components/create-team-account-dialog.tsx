@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useFetcher } from '@remix-run/react';
+import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -149,6 +150,7 @@ function CreateTeamAccountForm(props: { onClose: () => void }) {
             </Button>
 
             <Button data-test={'confirm-create-team-button'} disabled={pending}>
+              {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {pending ? (
                 <Trans i18nKey={'teams:creatingTeam'} />
               ) : (

@@ -55,13 +55,11 @@ export default function SignUpPage() {
       <Heading level={4}>
         <Trans i18nKey={'auth:signUpHeading'} />
       </Heading>
-
       <SignUpMethodsContainer
         providers={authConfig.providers}
         inviteToken={inviteToken}
         paths={paths}
       />
-
       <div className={'justify-centers flex'}>
         <Button asChild variant={'link'} size={'sm'}>
           <Link to={signInPath}>
