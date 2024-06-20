@@ -49,6 +49,9 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
       title: data?.title + ' · Tonearm',
+    },
+    {
+      content: 'description',
       description: 'Our most frequently asked Tonearm questions',
     },
   ];
