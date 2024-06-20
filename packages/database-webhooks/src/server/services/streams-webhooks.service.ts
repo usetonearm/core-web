@@ -74,15 +74,14 @@ class StreamsWebhooksService {
 
     if (accountError) logger.error(ctx, accountError.message);
 
-    const { data: contact, error: contactError } = await this.client
+    const { data: contacts, error: contactError } = await this.client
       .from('stream_alert_contact')
       .select('*')
-      .eq('stream', stream.id)
-      .single();
+      .eq('stream', stream.id);
 
     if (contactError) logger.error(ctx, contactError.message);
 
-    if (!contact) {
+    if (!contacts) {
       logger.warn(ctx, 'No contacts found for stream. Exiting');
       return;
     }
@@ -103,11 +102,13 @@ class StreamsWebhooksService {
 
     const emailSettings = this.getEmailSettings();
 
-    await mailer.sendEmail({
-      to: contact.email as string,
-      from: emailSettings.fromEmail,
-      subject: '[Alert] Your stream is silent!',
-      html: html,
+    contacts.forEach(async (contact) => {
+      await mailer.sendEmail({
+        to: contact.email as string,
+        from: emailSettings.fromEmail,
+        subject: '[Alert] Your stream is silent!',
+        html: html,
+      });
     });
   }
 
@@ -133,15 +134,14 @@ class StreamsWebhooksService {
 
     if (accountError) logger.error(ctx, accountError.message);
 
-    const { data: contact, error: contactError } = await this.client
+    const { data: contacts, error: contactError } = await this.client
       .from('stream_alert_contact')
       .select('*')
-      .eq('stream', stream.id)
-      .single();
+      .eq('stream', stream.id);
 
     if (contactError) logger.error(ctx, contactError.message);
 
-    if (!contact) {
+    if (!contacts) {
       logger.warn(ctx, 'No contacts found for stream. Exiting');
       return;
     }
@@ -162,11 +162,13 @@ class StreamsWebhooksService {
 
     const emailSettings = this.getEmailSettings();
 
-    await mailer.sendEmail({
-      to: contact.email as string,
-      from: emailSettings.fromEmail,
-      subject: 'Your stream is back online',
-      html: html,
+    contacts.forEach(async (contact) => {
+      await mailer.sendEmail({
+        to: contact.email as string,
+        from: emailSettings.fromEmail,
+        subject: 'Your stream is back online',
+        html: html,
+      });
     });
   }
 
@@ -192,15 +194,14 @@ class StreamsWebhooksService {
 
     if (accountError) logger.error(ctx, accountError.message);
 
-    const { data: contact, error: contactError } = await this.client
+    const { data: contacts, error: contactError } = await this.client
       .from('stream_alert_contact')
       .select('*')
-      .eq('stream', stream.id)
-      .single();
+      .eq('stream', stream.id);
 
     if (contactError) logger.error(ctx, contactError.message);
 
-    if (!contact) {
+    if (!contacts) {
       logger.warn(ctx, 'No contacts found for stream. Exiting');
       return;
     }
@@ -221,11 +222,13 @@ class StreamsWebhooksService {
 
     const emailSettings = this.getEmailSettings();
 
-    await mailer.sendEmail({
-      to: contact.email as string,
-      from: emailSettings.fromEmail,
-      subject: '[Alert] Your stream is down!',
-      html: html,
+    contacts.forEach(async (contact) => {
+      await mailer.sendEmail({
+        to: contact.email as string,
+        from: emailSettings.fromEmail,
+        subject: '[Alert] Your stream is down!',
+        html: html,
+      });
     });
   }
 

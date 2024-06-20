@@ -156,7 +156,7 @@ export default function StreamPage() {
       <StreamHeader account={account} stream={stream} />
       <ClientOnly>
         <div className="flex flex-wrap gap-1 text-slate-500">
-          <TestAlertButton email={email as string} />
+          <TestAlertButton email={email as string} streamId={stream.id} />
           {/* <Button variant="ghost">
             <Pause size="18" className="mr-2" />
             Pause
@@ -227,9 +227,10 @@ export const action = async function ({ request }: ActionFunctionArgs) {
 
 interface TestAlertButtonProps {
   email: string;
+  streamId: string;
 }
 
-export function TestAlertButton({ email }: TestAlertButtonProps) {
+export function TestAlertButton({ email, streamId }: TestAlertButtonProps) {
   const [state, setState] = useState({
     success: false,
     error: false,
@@ -243,6 +244,7 @@ export function TestAlertButton({ email }: TestAlertButtonProps) {
 
   const data = {
     email: email,
+    streamId: streamId,
   };
 
   const onSubmit = () => {
