@@ -38,7 +38,7 @@ export const meta = () => {
       title: 'About · Tonearm',
     },
     {
-      content: 'description',
+      name: 'description',
       description:
         'How Tonearm was created from the insights of running an internet radio station for over five years',
     },

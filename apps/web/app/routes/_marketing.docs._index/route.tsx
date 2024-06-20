@@ -29,7 +29,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       title: data?.title + ' · Tonearm',
     },
     {
-      content: 'description',
+      name: 'description',
       description: data?.description,
     },
   ];

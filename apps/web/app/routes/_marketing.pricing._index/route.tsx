@@ -23,7 +23,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       title: data?.title + ' · Tonearm',
     },
     {
-      content: 'description',
+      name: 'description',
       description:
         '"Discover the affordable pricing plans for Tonearm, the leading internet radio station monitoring service. Choose a plan that fits your needs and keep your streams online with our reliable and efficient monitoring solutions. Start your free trial today!',
     },
