@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { QuestionMarkCircledIcon } from '@radix-ui/react-icons';
 import { useNavigate } from '@remix-run/react';
-import { Loader2, PlusCircle } from 'lucide-react';
+import { ExternalLink, Loader2, PlusCircle } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -29,6 +30,12 @@ import {
 } from '@kit/ui/form';
 import { Input } from '@kit/ui/input';
 import { Label } from '@kit/ui/label';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@kit/ui/tooltip';
 
 import { AddStreamSchema } from '../_lib';
 
@@ -40,6 +47,7 @@ type AddStreamProps = {
 interface FormValues {
   title: string;
   url: string;
+  email: string;
 }
 
 export default function AddStreamDialog({
@@ -70,7 +78,7 @@ export default function AddStreamDialog({
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setLoading(true);
-    const { title, url } = data;
+    const { title, url, email } = data;
 
     const isValidURL = await validateURL(url);
     if (!isValidURL) {
@@ -89,8 +97,11 @@ export default function AddStreamDialog({
       if (error) {
         console.error('Error inserting data:', error);
       } else {
+        const { error: insertError } = await supabase
+          .from('stream_alert_contact')
+          .insert({ email: email, stream: data?.id });
+
         setLoading(false);
-        console.log('Stream added successfully');
         toast.success('Successfully added your stream to be monitored');
         navigate(`/home/${account}/streams/${data.id}`);
       }
@@ -118,8 +129,8 @@ export default function AddStreamDialog({
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
+          <div className="flex-row space-y-4 pb-4">
+            <div className="flex-row space-y-1">
               <Label htmlFor="title" className="text-right">
                 Title
               </Label>
@@ -130,15 +141,37 @@ export default function AddStreamDialog({
                 {...register('title', { required: true })}
               />
               {errors.title && (
-                <span className="col-span-4 text-red-500">
+                <span className="col-span-4 text-sm text-red-500">
                   This field is required
                 </span>
               )}
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="url" className="text-right">
-                URL
-              </Label>
+            <div className="flex-row space-y-1">
+              <div className="align-center inline-flex">
+                <Label htmlFor="url" className="text-right">
+                  URL
+                </Label>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <QuestionMarkCircledIcon className="ml-1 text-gray-500" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>
+                        What URL does your radio stream from?{' '}
+                        <a
+                          className="underline"
+                          target="_blank"
+                          href="https://usetonearm.com/docs"
+                        >
+                          How do I find this
+                        </a>
+                        <ExternalLink className="ml-1 inline h-3 w-3" />
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
               <Input
                 id="url"
                 type="url"
@@ -147,10 +180,33 @@ export default function AddStreamDialog({
                 {...register('url', { required: true })}
               />
               {errors.url && (
-                <span className="col-span-4 text-red-500">
+                <span className="col-span-4 text-sm text-red-500">
                   This field is required
                 </span>
               )}
+              <p className="pl-2 pt-1 text-xs text-gray-500">
+                The URL of your stream
+              </p>
+            </div>
+            <div className="flex-row space-y-1">
+              <Label htmlFor="email" className="text-right">
+                Contact Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="your@email.com"
+                className="col-span-3"
+                {...register('email', { required: true })}
+              />
+              {errors.title && (
+                <span className="col-span-4 text-sm text-red-500">
+                  This field is required
+                </span>
+              )}
+              <p className="pl-2 pt-1 text-xs text-gray-500">
+                This is the email we'll contact for any alerts
+              </p>
             </div>
           </div>
 

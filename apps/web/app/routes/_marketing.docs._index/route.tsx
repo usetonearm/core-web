@@ -19,7 +19,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
 
   return {
     title: t('marketing:documentation'),
-    content: t('marketing:documentationSubtitle'),
+    description: t('marketing:documentationSubtitle'),
   };
 };
 

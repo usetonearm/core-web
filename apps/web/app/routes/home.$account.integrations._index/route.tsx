@@ -146,13 +146,13 @@ const DiscordSvg = () => (
 const integrations = [
   {
     title: 'Slack',
-    content:
+    description:
       'Create, acknowledge, and resolve Better Stack incidents from Slack',
     Logo: SlackSvg,
   },
   {
     title: 'Discord',
-    content: 'Push notifications into your Discord channels',
+    description: 'Push notifications into your Discord channels',
     Logo: DiscordSvg,
   },
 ];

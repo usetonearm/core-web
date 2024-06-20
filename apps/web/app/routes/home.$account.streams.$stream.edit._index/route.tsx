@@ -65,17 +65,13 @@ export const loader = async (args: LoaderFunctionArgs) => {
     .eq('id', args.params.stream as string)
     .single();
 
-  const { data: contacts, error: contactErrors } = await supabase
-    .from('stream_alert_contact')
-    .select('*');
-
   if (!stream) return;
 
   const account = args.params.account as string;
   const title = 'Edit: ' + stream.title;
 
   return {
-    contacts,
+    contacts: stream.stream_alert_contact,
     title,
     account,
     stream,
