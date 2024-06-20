@@ -33,7 +33,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
 
   return json({
     title: t('marketing:blog'),
-    description: t('marketing:blogSubtitle'),
+    content: t('marketing:blogSubtitle'),
     posts,
     total,
     page,
@@ -49,7 +49,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     },
     {
       name: 'description',
-      description: data?.description,
+      content: data?.description,
     },
   ];
 };

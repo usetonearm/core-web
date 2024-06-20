@@ -30,7 +30,7 @@ export const meta: MetaFunction = () => {
     },
     {
       name: 'description',
-      description:
+      content:
         'Best in class internet radio silence & downtime monitoring. Built by radio operators, for radio operators. Realtime silence detection and outage alerts',
     },
   ];

@@ -72,7 +72,7 @@ export default function TeamIntegrationsPage() {
 
 interface IntegrationProps {
   title: string;
-  description: string;
+  content: string;
   Logo: React.ComponentType;
 }
 
@@ -146,13 +146,13 @@ const DiscordSvg = () => (
 const integrations = [
   {
     title: 'Slack',
-    description:
+    content:
       'Create, acknowledge, and resolve Better Stack incidents from Slack',
     Logo: SlackSvg,
   },
   {
     title: 'Discord',
-    description: 'Push notifications into your Discord channels',
+    content: 'Push notifications into your Discord channels',
     Logo: DiscordSvg,
   },
 ];

@@ -19,7 +19,7 @@ export const loader = async (args: LoaderFunctionArgs) => {
 
   return {
     title: t('marketing:documentation'),
-    description: t('marketing:documentationSubtitle'),
+    content: t('marketing:documentationSubtitle'),
   };
 };
 
@@ -30,7 +30,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     },
     {
       name: 'description',
-      description: data?.description,
+      content: data?.description,
     },
   ];
 };

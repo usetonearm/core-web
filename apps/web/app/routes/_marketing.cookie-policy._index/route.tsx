@@ -11,7 +11,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     },
     {
       name: 'description',
-      description: data?.subtitle,
+      content: data?.subtitle,
     },
   ];
 };

@@ -52,7 +52,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     },
     {
       name: 'description',
-      description: 'Our most frequently asked Tonearm questions',
+      content: 'Our most frequently asked Tonearm questions',
     },
   ];
 };
