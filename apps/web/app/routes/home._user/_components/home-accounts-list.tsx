@@ -48,7 +48,7 @@ function HomeAddAccountButton() {
 
   return (
     <>
-      <Button size="sm" onClick={() => setIsAddingAccount(true)}>
+      <Button onClick={() => setIsAddingAccount(true)}>
         <Trans i18nKey={'account:createTeamButtonLabel'} />
       </Button>
 

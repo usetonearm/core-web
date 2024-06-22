@@ -9,11 +9,14 @@ import {
   LoaderCircle,
   Menu,
   Target,
+  Volume,
+  Volume2,
 } from 'lucide-react';
 import { Line, LineChart, ResponsiveContainer, XAxis } from 'recharts';
 
 import { Database } from '@kit/supabase/database';
 import { Badge } from '@kit/ui/badge';
+import { Button } from '@kit/ui/button';
 import {
   Card,
   CardContent,
@@ -86,12 +89,9 @@ function StreamListItem(stream: Stream, account: string) {
   }, [stream.status]);
 
   return (
-    <Link to={`/home/${account}/streams/${stream.id}`} key={stream.id}>
-      <Card
-        key={stream.id}
-        className="cursor-pointer hover:bg-slate-50 dark:hover:bg-gray-900"
-      >
-        <div className="flex items-center justify-between p-4">
+    <Card key={stream.id} className="hover:bg-slate-50 dark:hover:bg-gray-900">
+      <div className="flex items-center justify-between p-4">
+        <Link to={`/home/${account}/streams/${stream.id}`} key={stream.id}>
           <div className="flex items-center">
             <div className="flex w-16 items-center justify-center">
               <StatusIcon status={stream.status} />
@@ -115,24 +115,17 @@ function StreamListItem(stream: Stream, account: string) {
               </div>
             </div>
           </div>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <span
-                  className={'flex items-center gap-2 text-xs text-gray-400'}
-                >
-                  <Target size="20px" />
-                  <span>1m</span>
-                </span>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Checks every 1 minute</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+        </Link>
+        <div>
+          <a href={stream.url} target="_blank">
+            <Button variant="outline">
+              <Volume2 className="mr-2 h-4 w-4" />
+              Listen
+            </Button>
+          </a>
         </div>
-      </Card>
-    </Link>
+      </div>
+    </Card>
   );
 }
 
