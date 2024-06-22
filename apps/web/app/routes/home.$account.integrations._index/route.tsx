@@ -15,6 +15,7 @@ import { PageBody } from '@kit/ui/page';
 import { Trans } from '@kit/ui/trans';
 
 import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
+import { requirePlanOrTrial } from '~/lib/require-plan-or-trial';
 import { requireUserLoader } from '~/lib/require-user-loader';
 import { TeamAccountLayoutPageHeader } from '~/routes/home.$account/_components/team-account-layout-page-header';
 
@@ -27,6 +28,11 @@ export const loader = async (args: LoaderFunctionArgs) => {
 
   const api = createTeamAccountsApi(supabase);
   const workspace = await api.getAccountWorkspace(account);
+
+  await requirePlanOrTrial(
+    args.request,
+    workspace.data?.account.slug as string,
+  );
 
   return {
     title,
@@ -72,7 +78,7 @@ export default function TeamIntegrationsPage() {
 
 interface IntegrationProps {
   title: string;
-  content: string;
+  description: string;
   Logo: React.ComponentType;
 }
 

@@ -1,7 +1,8 @@
 import { User } from '@supabase/supabase-js';
 
-import { ArrowLeftCircle, ArrowRightCircle } from 'lucide-react';
+import { ArrowLeftCircle, ArrowRightCircle, Link } from 'lucide-react';
 
+import { Button } from '@kit/ui/button';
 import { If } from '@kit/ui/if';
 import { Sidebar, SidebarContent } from '@kit/ui/sidebar';
 import {
@@ -83,6 +84,9 @@ function SidebarContainer(props: {
       </SidebarContent>
 
       <div className={'absolute bottom-4 left-0 w-full'}>
+        {/* <SidebarContent>
+          <TrialProgressBanner accountSlug="team" />
+        </SidebarContent> */}
         <SidebarContent>
           <ProfileAccountDropdownContainer
             user={props.user}
@@ -98,6 +102,17 @@ function SidebarContainer(props: {
         </SidebarContent>
       </div>
     </>
+  );
+}
+
+export function TrialProgressBanner(props: { accountSlug: string }) {
+  return (
+    <div className="mb-2 flex-row justify-center rounded-md border border-blue-100 bg-blue-50 p-2 text-center align-middle text-sm text-blue-950">
+      <p className="pb-2">7 days left in your trial!</p>
+      <div className="h-2.5 w-full rounded-full bg-blue-100 dark:bg-gray-700">
+        <div className="h-2.5 w-[50%] rounded-full bg-blue-400"></div>
+      </div>
+    </div>
   );
 }
 

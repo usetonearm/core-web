@@ -1,9 +1,10 @@
 import { MetaFunction } from '@remix-run/node';
-import { Outlet, json, useLoaderData } from '@remix-run/react';
+import { Link, Outlet, json, useLoaderData } from '@remix-run/react';
 import { LoaderFunctionArgs } from '@remix-run/server-runtime';
 import { ThemeProvider } from 'next-themes';
 
 import { getSupabaseServerClient } from '@kit/supabase/server-client';
+import { Button } from '@kit/ui/button';
 import { If } from '@kit/ui/if';
 import {
   Page,
@@ -16,6 +17,7 @@ import { AppLogo } from '~/components/app-logo';
 import pathsConfig from '~/config/paths.config';
 import { getTeamAccountSidebarConfig } from '~/config/team-account-navigation.config';
 import { layoutStyleCookie } from '~/lib/cookies';
+import { requirePlanOrTrial } from '~/lib/require-plan-or-trial';
 
 import { TeamAccountLayoutMobileNavigation } from './_components/team-account-layout-mobile-navigation';
 import { TeamAccountLayoutSidebar } from './_components/team-account-layout-sidebar';

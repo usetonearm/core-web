@@ -36,7 +36,7 @@ export type Database = {
     Tables: {
       accounts: {
         Row: {
-          created_at: string | null
+          created_at: string
           created_by: string | null
           email: string | null
           id: string
@@ -50,7 +50,7 @@ export type Database = {
           updated_by: string | null
         }
         Insert: {
-          created_at?: string | null
+          created_at?: string
           created_by?: string | null
           email?: string | null
           id?: string
@@ -64,7 +64,7 @@ export type Database = {
           updated_by?: string | null
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           created_by?: string | null
           email?: string | null
           id?: string
@@ -257,28 +257,28 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "checks_account_id_fkey"
+            foreignKeyName: "public_checks_account_id_fkey"
             columns: ["account_id"]
             isOneToOne: false
             referencedRelation: "accounts"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "checks_account_id_fkey"
+            foreignKeyName: "public_checks_account_id_fkey"
             columns: ["account_id"]
             isOneToOne: false
             referencedRelation: "user_account_workspace"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "checks_account_id_fkey"
+            foreignKeyName: "public_checks_account_id_fkey"
             columns: ["account_id"]
             isOneToOne: false
             referencedRelation: "user_accounts"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "checks_stream_fkey"
+            foreignKeyName: "public_checks_stream_fkey"
             columns: ["stream"]
             isOneToOne: false
             referencedRelation: "streams"
@@ -884,7 +884,7 @@ export type Database = {
           account_name: string
         }
         Returns: {
-          created_at: string | null
+          created_at: string
           created_by: string | null
           email: string | null
           id: string
@@ -1030,6 +1030,7 @@ export type Database = {
           primary_owner_user_id: string
           subscription_status: Database["public"]["Enums"]["subscription_status"]
           permissions: Database["public"]["Enums"]["app_permissions"][]
+          created_at: string
         }[]
       }
       transfer_team_account_ownership: {

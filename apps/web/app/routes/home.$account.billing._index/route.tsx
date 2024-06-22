@@ -17,6 +17,7 @@ import {
 import { useCsrfToken } from '@kit/csrf/client';
 import { getSupabaseServerClient } from '@kit/supabase/server-client';
 import { Alert, AlertDescription, AlertTitle } from '@kit/ui/alert';
+import { Card } from '@kit/ui/card';
 import { If } from '@kit/ui/if';
 import { PageBody } from '@kit/ui/page';
 import { Trans } from '@kit/ui/trans';
@@ -135,6 +136,10 @@ export default function TeamAccountBillingPage() {
     csrfToken,
   ]);
 
+  // Check for the 'planExpired' query parameter
+  const searchParams = new URLSearchParams(window.location.search);
+  const planExpired = searchParams.get('planExpired') === 'true';
+
   return (
     <>
       <TeamAccountLayoutPageHeader
@@ -142,6 +147,17 @@ export default function TeamAccountBillingPage() {
         title={<Trans i18nKey={'common:billingTabLabel'} />}
         description={<Trans i18nKey={'common:billingTabDescription'} />}
       />
+
+      {planExpired && (
+        <Alert variant="destructive" className="mb-4 max-w-lg">
+          <AlertTitle>Your trial has expired!</AlertTitle>
+          <AlertDescription>
+            Your 14 days of free use has run its course. Please select a plan to
+            continue with the platform. Or reach out to support@usetonearm for
+            any further assistance.
+          </AlertDescription>
+        </Alert>
+      )}
 
       <div
         className={cn(`flex w-full flex-col space-y-4`, {

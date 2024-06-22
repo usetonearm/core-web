@@ -438,13 +438,13 @@ function DefaultCheckoutButton(
     redirectToCheckout: props.redirectToCheckout ? 'true' : 'false',
   });
 
-  const linkHref =
-    props.plan.href ?? `${signUpPath}?${searchParams.toString()}` ?? '';
+  // const linkHref =
+  //   props.plan.href ?? `${signUpPath}?${searchParams.toString()}` ?? '';
 
-  const label = props.plan.buttonLabel ?? 'common:getStartedWithPlan';
+  const label = props.plan.buttonLabel ?? 'common:getStartedForFree';
 
   return (
-    <Link className={'w-full'} to={linkHref}>
+    <Link className={'w-full'} to={signUpPath}>
       <Button
         size={'lg'}
         className={'ring-primary w-full ring-2'}
