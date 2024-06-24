@@ -27,15 +27,20 @@ export const loader = async (args: LoaderFunctionArgs) => {
   await requireUserLoader(args.request);
   const supabase = getSupabaseServerClient(args.request);
 
-  const { data: streamsData, error } = await supabase
-    .from('streams')
-    .select('id, title, status, url');
-
   const account = args.params.account as string;
   const title = i18n.t('teams:home.pageTitle');
 
   const api = createTeamAccountsApi(supabase);
   const workspace = await api.getAccountWorkspace(account);
+
+  if (!workspace.data?.account) {
+    throw new Error();
+  }
+
+  const { data: streamsData, error } = await supabase
+    .from('streams')
+    .select('id, title, status, url')
+    .eq('account_id', workspace.data?.account.id);
 
   await requirePlanOrTrial(
     args.request,
