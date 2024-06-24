@@ -59,7 +59,7 @@ export function SiteFooter() {
               ' w-full lg:flex-row lg:justify-end xl:space-x-16'
             }
           >
-            <div>
+            {/* <div>
               <div className={'flex flex-col space-y-2.5'}>
                 <FooterSectionHeading>
                   <Trans i18nKey={'marketing:useCase'} />
@@ -88,7 +88,7 @@ export function SiteFooter() {
                   </FooterLink>
                 </FooterSectionList>
               </div>
-            </div>
+            </div> */}
             <div>
               <div className={'flex flex-col space-y-2.5'}>
                 <FooterSectionHeading>
