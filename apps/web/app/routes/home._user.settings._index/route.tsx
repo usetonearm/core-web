@@ -41,8 +41,6 @@ export const loader = async (args: LoaderFunctionArgs) => {
 
   const supabase = getSupabaseServerClient(args.request);
 
-  const { data, error } = await supabase.from('tasks').select('*');
-
   const i18n = await createI18nServerInstance(args.request);
   const title = i18n.t('account:settingsTab');
 
